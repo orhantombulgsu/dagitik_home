@@ -12,6 +12,7 @@ class Test_Ui(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+
     def run(self):
         self.show()
         self.qt_app.exec_()
