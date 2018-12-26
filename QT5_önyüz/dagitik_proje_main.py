@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 import sys
 
-from dagitik_proje_ui import Ui_MainWindow
+from QT5_önyüz.dagitik_proje_ui import Ui_MainWindow
 
 
 class Test_Ui(QtWidgets.QMainWindow):
