@@ -2,7 +2,9 @@ from PyQt5 import QtWidgets, QtGui
 import sys
 
 from QT5_önyüz.dagitik_proje_ui import Ui_MainWindow
-my_blog_list =[]
+
+my_blog_list = []
+
 
 class Test_Ui(QtWidgets.QMainWindow):
     def __init__(self):
@@ -12,13 +14,51 @@ class Test_Ui(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        list1 =[]
+        # list1 =[]
         self.ui.pushButton.pressed.connect(self.get_host_with_port)
         self.ui.pushButton.pressed.connect(self.change_profile_name)
-        self.ui.pushButton_5.pressed.connect(self.share_twit)
+        # self.ui.pushButton_5.pressed.connect(self.share_twit_button)
+        self.ui.pushButton.pressed.connect(self.disable_button)
+        self.ui.pushButton_2.pressed.connect(self.logout_button)
+        self.ui.pushButton_7.pressed.connect(self.subscribe_button)
+        self.ui.pushButton_3.pressed.connect(self.unsubscribe_button)
+        self.ui.pushButton_4.pressed.connect(self.unblock_button)
+        self.ui.pushButton_6.pressed.connect(self.block_button)
+        self.ui.pushButton_9.pressed.connect(self.send_message_button)
+
+    def refresh_feed_button(self):
+        # takip edilen kişilerin serverlarına istek atarak twitleri yeniler
+        pass
+
+    def send_message_button(self):
+        # Send message to followed içine yazılan text yalnızca
+        # followers içinde check edilen kişilere gönderilecektir
+        pass
+
+    def block_button(self):
+        # Followers içindeki kullanıcılardan check edilenleri engelleyecektir.
+        pass
+
+    def unblock_button(self):
+        # Blocked içindeki kullanıcılardan check edilenlerin engellerini kaldıracaktır.
+        pass
+
+    def unsubscribe_button(self):
+        # Followed içindeki kullanıcılardan check edilenleri takipten çıkacaktır.
+        pass
+
+    def subscribe_button(self):
+        # Suggested users içindeki kullanıcılardan check edilenleri takip edecektir.
+        pass
+
+    def logout_button(self):
+        # logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
+        self.close()
+
+    def disable_button(self):
+        self.ui.pushButton.setDisabled(True)
 
     def get_host_with_port(self):
-
         # ip ve port alma işlemi
         ip = self.ui.plainTextEdit.toPlainText()
         port = self.ui.plainTextEdit_2.toPlainText()
@@ -32,7 +72,9 @@ class Test_Ui(QtWidgets.QMainWindow):
         # self.ui.label_2.setText(username)
         pass
 
-    def share_twit(self):
+    def share_twit_button(self):
+        pass
+        '''
         # share butonu ile my blog içerisine twit paylaşımı burası degisecek
         text = self.ui.plainTextEdit_4.toPlainText()
         if len(my_blog_list)==0:
@@ -45,17 +87,18 @@ class Test_Ui(QtWidgets.QMainWindow):
             # twit_list=[]
             # twit1=self.ui.plainTextEdit_4.toPlainText()
             # twit_list.append(twit1)
-            # self.ui.listWidget_6.addItems(twit_list)
+            # self.ui.listWidget_6.addItems(twit_list) 
+        '''
 
     def suggest_user(self, number_of_suggest, userlist):
         # sayıya göre kullanıcı öneri listesini gösterme
-        self.number_of_suggest = number_of_suggest
-        self.userlist = userlist
-        if userlist is None:
-            error_notification = 'Baglananan kullanıcı bulunmamaktadır.'
-            self.ui.listWidget_6.addItems(error_notification)
 
-
+        #self.number_of_suggest = number_of_suggest
+        #self.userlist = userlist
+        #if userlist is None:
+        #    error_notification = 'Baglananan kullanıcı bulunmamaktadır.'
+        #    self.ui.listWidget_6.addItems(error_notification)
+        pass
 
     def run(self):
         self.show()
