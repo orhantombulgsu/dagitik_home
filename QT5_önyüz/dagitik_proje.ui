@@ -275,7 +275,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>What's happining ?</string>
+     <string>What's happening ?</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_11">

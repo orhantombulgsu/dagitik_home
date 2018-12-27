@@ -151,7 +151,7 @@ class Ui_MainWindow(object):
         self.pushButton_8.setText(_translate("MainWindow", "Refresh the Feeds"))
         self.label_9.setText(_translate("MainWindow", "Feeds"))
         self.pushButton_5.setText(_translate("MainWindow", "Share"))
-        self.label_10.setText(_translate("MainWindow", "What\'s happining ?"))
+        self.label_10.setText(_translate("MainWindow", "What\'s happening ?"))
         self.label_11.setText(_translate("MainWindow", "My Blog List"))
         self.label_12.setText(_translate("MainWindow", "Send Message to Followed"))
         self.label_13.setText(_translate("MainWindow", "Inbox "))
