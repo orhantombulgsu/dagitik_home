@@ -3,10 +3,11 @@ import queue
 import socket
 import time
 import uuid
+import QT5_önyüz.dagitik_proje_main
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT =  12343
+SERVER_PORT = 12343
 SERVER_PORT2 = 12344
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
@@ -18,32 +19,27 @@ NAME = "MUSTAFA"
 serverQueue = queue.Queue()
 clientQueue = queue.Queue()
 
-
-
-
-
-
-
 # uuid.NAMESPACE_DNS.hex # dagdelenin metodu(MAC E göre)
 
 
-
-
-
-
-
-
 userInfoDict = dict()
-myUUID=uuid.uuid4()
-print("my UUID = "+str(myUUID))
-tmpUUID="yasemin"
-userInfoDict[tmpUUID]=["yadress", "yPort", "yNanme", "yNEGOTIATOR"]
-tmpUUID="orhan"
-userInfoDict[tmpUUID]=["oadress", "oPort", "oNanme", "oNEGOTIATOR"]
+myUUID = uuid.uuid4()
+print("my UUID = " + str(myUUID))
+tmpUUID = "yasemin"
+userInfoDict[tmpUUID] = ["yadress", "yPort", "yNanme", "yNEGOTIATOR"]
+tmpUUID = "orhan"
+userInfoDict[tmpUUID] = ["oadress", "oPort", "oNanme", "oNEGOTIATOR"]
 
 
+class arayüzthread(threading.Thread):
+    def __init__(self):
+        super().__init__()
+        self.Arayüz = QT5_önyüz.dagitik_proje_main.main()
+    def run(self):
+        pass
 
-#loglama işlemini yapacak thread tanımlanıyor.
+
+# loglama işlemini yapacak thread tanımlanıyor.
 class loggerThread(threading.Thread):
     def __init__(self, threadName, logFilePath, logQueue, exitFlag):
         threading.Thread.__init__(self)
@@ -66,15 +62,16 @@ class loggerThread(threading.Thread):
         file.write(str(time.ctime()) + " - " + self.name + "exiting." + "\n")
         file.close()
 
+
 class ServerThread(threading.Thread):
-    def __init__(self, threadName,mySocket,myHostname,myPort,myName,myType, logQueue, exitFlag):
+    def __init__(self, threadName, mySocket, myHostname, myPort, myName, myType, logQueue, exitFlag):
         threading.Thread.__init__(self)
-        self.threadName=threadName
-        self.mySocket=mySocket
-        self.myHostname=myHostname
-        self.myPort=myPort
-        self.myName=myName
-        self.myType=myType
+        self.threadName = threadName
+        self.mySocket = mySocket
+        self.myHostname = myHostname
+        self.myPort = myPort
+        self.myName = myName
+        self.myType = myType
         self.logQueue = logQueue
         self.exitFlag = exitFlag
 
@@ -82,114 +79,111 @@ class ServerThread(threading.Thread):
         log = "Server thread starting."
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         while True:
-            msgReiceved = ( (self.mySocket.recv(1024)).decode() ).strip()
+            msgReiceved = ((self.mySocket.recv(1024)).decode()).strip()
             if len(msgReiceved) > 1:
-                msgToSend=""
-                print("ServerReaderThread "+msgReiceved+" ServerReaderThread")
+                msgToSend = ""
+                print("ServerReaderThread " + msgReiceved + " ServerReaderThread")
                 log = "Server thread received a message : " + msgReiceved
                 self.logQueue.put(time.ctime() + "\t\t - " + log)
-                msgToSend=str(self.readerParser(msgReiceved)    )
+                msgToSend = str(self.readerParser(msgReiceved))
                 if len(msgToSend) >= 5:
-                    self.mySocket.send( ( msgToSend ).encode() )
+                    self.mySocket.send((msgToSend).encode())
                     log = "Server thread sent a message : " + msgToSend
                     self.logQueue.put(time.ctime() + "\t\t - " + log)
 
-
-
     def readerParser(self, request):
-        prot=request[:5]
-        response=""
+        prot = request[:5]
+        response = ""
 
         print("ReaderParser " + request + " ReaderParser")
         if prot == "HELLO":
-            response="HELLO"
+            response = "HELLO"
 
-        elif prot == "UINFO": # YENI KULLANICI İSTEĞİ /KULLANICI BAĞLANTI KONTROLÜ
-            paramIndex=request.find(":")
-            print("UINFODAYIM= "+str(paramIndex))
-            if(not paramIndex == -1):
-                print("paramiGectimBenreaderPArserim "+request+" ServerReaderThread")
-                paramList= ( ( request[paramIndex+1:] ).strip() ).split('$')
+        elif prot == "UINFO":  # YENI KULLANICI İSTEĞİ /KULLANICI BAĞLANTI KONTROLÜ
+            paramIndex = request.find(":")
+            print("UINFODAYIM= " + str(paramIndex))
+            if (not paramIndex == -1):
+                print("paramiGectimBenreaderPArserim " + request + " ServerReaderThread")
+                paramList = ((request[paramIndex + 1:]).strip()).split('$')
                 # print("paramList[0]= "+ str(paramList[0]))
                 if paramList[0] in userInfoDict.keys():
                     response = "CHKED"
                 # userInfoList[paramList[0]]=list(paramList[1],paramList[2],paramList[3],paramList[4])
-                else: # BEKLE AZ SEN
-                    UUIDtoCheck=paramList[0]
+                else:  # BEKLE AZ SEN
+                    UUIDtoCheck = paramList[0]
                     # clientQueue.put("CHECK")
-                    myClient=ClientThread("Client Thread",paramList[1],int(paramList[2]),"CHECK", self.logQueue)
-                    response=myClient.control()
+                    myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), "CHECK", self.logQueue)
+                    response = myClient.control()
                     print('RESPONSE:' + response)
                     print('UUID:' + UUIDtoCheck)
                     if str(response[6:]) == str(UUIDtoCheck):
-                        msg="CONOK"
-                        userInfoDict[paramList[0]]=[paramList[1], paramList[2], paramList[3], paramList[4]]
+                        msg = "CONOK"
+                        userInfoDict[paramList[0]] = [paramList[1], paramList[2], paramList[3], paramList[4]]
                     else:
-                        msg="CONER"
+                        msg = "CONER"
 
-                    self.mySocket.send( ( (msg).strip() ).encode() )
-                    log = "Server thread : "+ "UUIDs checked.   " + msg
+                    self.mySocket.send(((msg).strip()).encode())
+                    log = "Server thread : " + "UUIDs checked.   " + msg
                     self.logQueue.put(time.ctime() + "\t\t - " + log)
-                    msgReiceved = ( (self.mySocket.recv(1024)).decode() ).strip()
+                    msgReiceved = ((self.mySocket.recv(1024)).decode()).strip()
                     if len(msgReiceved) > 1:
                         pass
 
 
             else:
-                response="ERROR"
+                response = "ERROR"
 
 
-        elif prot == "CHECK": # UUID KONTROLÜ
-            response="MUUID"+":"+str(myUUID)
+        elif prot == "CHECK":  # UUID KONTROLÜ
+            response = "MUUID" + ":" + str(myUUID)
 
-        elif prot == "CONOK": # INF :UUID TUTARLI
-            response="HELLO"
+        elif prot == "CONOK":  # INF :UUID TUTARLI
+            response = "HELLO"
 
-        elif prot == "CONER": # INF: UUID FARKLI
-            response="BYBYE"
+        elif prot == "CONER":  # INF: UUID FARKLI
+            response = "BYBYE"
 
-        elif prot == "LSUSR": # KULLANICI LISTE PAYLASIMI
+        elif prot == "LSUSR":  # KULLANICI LISTE PAYLASIMI
             # paramIndex=request.find(":")
             # if(not paramIndex == -1):
             #     nbUser=( request[paramIndex+1:] ).strip()
-            i=0
+            i = 0
             paramList = ""
             for key in userInfoDict.keys():
-                if i<NUMBER_OF_USERLIST:
-                    param=key+","+userInfoDict.get(key)[0]+","+userInfoDict.get(key)[1]+","+userInfoDict.get(key)[2]+","+userInfoDict.get(key)[3]
+                if i < NUMBER_OF_USERLIST:
+                    param = key + "," + userInfoDict.get(key)[0] + "," + userInfoDict.get(key)[1] + "," + \
+                            userInfoDict.get(key)[2] + "," + userInfoDict.get(key)[3]
                     # print("PARAMMMMMMM"+param)
-                    paramList+=param+"$"
+                    paramList += param + "$"
                 else:
                     break
-                i+= 1
-            paramList=paramList[:-1]
-            response="LSUOK"+":"+paramList
+                i += 1
+            paramList = paramList[:-1]
+            response = "LSUOK" + ":" + paramList
         elif prot == "QUITT":
             response = "EXITT"
             exitFlag = True
             self.logQueue.put("QUITT")
 
         else:
-            response="ERROR"
+            response = "ERROR"
         log = "Server thread : " + response
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         return response
 
 
-
-
 class ClientThread(threading.Thread):
-    def __init__(self, threadName, hostToConnect,portToConnect,cmnd, logQueue):
+    def __init__(self, threadName, hostToConnect, portToConnect, cmnd, logQueue):
         threading.Thread.__init__(self)
-        self.threadName=threadName
-        self.hostToConnect=hostToConnect
-        self.portToConnect=portToConnect
-        self.cmnd=cmnd
+        self.threadName = threadName
+        self.hostToConnect = hostToConnect
+        self.portToConnect = portToConnect
+        self.cmnd = cmnd
         self.logQueue = logQueue
-
 
     def run(self):
         pass
+
     def control(self):
         log = self.threadName + " : " + "is controlling."
         self.logQueue.put(time.ctime() + "\t\t - " + log)
@@ -201,25 +195,24 @@ class ClientThread(threading.Thread):
 
         mySocket.connect((host, port))
 
-
-        prot=self.cmnd[:5]
+        prot = self.cmnd[:5]
         if prot == "UINFO":
             paramList = str(myUUID) + "$" + SERVER_HOST + "$" + str(SERVER_PORT) + "$" + NAME + "$" + TYPE
             textToSend = prot + ":" + paramList
         else:
-            textToSend=self.cmnd
+            textToSend = self.cmnd
 
         log = self.threadName + " : " + "sending a message : " + textToSend
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         # print(s.recv(1024).decode())  # blocking'dir
-        mySocket.send( (textToSend.strip()).encode() )
-        response= ( ( mySocket.recv(1024) ).decode() ).strip()
+        mySocket.send((textToSend.strip()).encode())
+        response = ((mySocket.recv(1024)).decode()).strip()
         mySocket.close()  # Close the socket when done
-        if(response[:5]=="LSUOK"):
+        if (response[:5] == "LSUOK"):
             pass
 
         if len(response) > 1:
-            print ( "ClientThread " + response + " ClientThread"  )
+            print("ClientThread " + response + " ClientThread")
             log = self.threadName + " : " + "response is " + response
             self.logQueue.put(time.ctime() + "\t\t - " + log)
             return response
@@ -229,10 +222,11 @@ class ClientThread(threading.Thread):
 
 
 class UserInputThread(threading.Thread):
-    def __init__(self,threadname, logQueue):
+    def __init__(self, threadname, logQueue):
         threading.Thread.__init__(self)
-        self.threadName=threadname
-        self.logQueue=logQueue
+        self.threadName = threadname
+        self.logQueue = logQueue
+
     def run(self):
         log = self.threadName + " : " + "is starting."
         self.logQueue.put(time.ctime() + "\t\t - " + log)
@@ -240,8 +234,8 @@ class UserInputThread(threading.Thread):
             request = input("Enter your request > ")
             log = self.threadName + " : " + "Input request is " + request
             self.logQueue.put(time.ctime() + "\t\t - " + log)
-            myClient=ClientThread("Client Thread",SERVER_HOST,SERVER_PORT2,request,self.logQueue)
-            response=myClient.control()
+            myClient = ClientThread("Client Thread", SERVER_HOST, SERVER_PORT2, request, self.logQueue)
+            response = myClient.control()
 
 
 def main():
@@ -258,12 +252,15 @@ def main():
     logQueue = queue.Queue()
     exitFlag = False
 
-    Logger=loggerThread("Logger", "log.txt", logQueue, exitFlag)
+    Logger = loggerThread("Logger", "log.txt", logQueue, exitFlag)
     Logger.start()
 
     userInputThread = UserInputThread("User Input Thread", logQueue)
     userInputThread.start()
 
+    arayüz = arayüzthread()
+
+    arayüz.start()
     # for i in range(2):
     while True:
         try:
@@ -274,7 +271,7 @@ def main():
             log = "Got connection from " + str(addr)
             logQueue.put(time.ctime() + "\t\t - " + log)
             print('Got connection from', addr)
-            serverThread = ServerThread("Server Thread",c,myUUID,SERVER_HOST,SERVER_PORT,TYPE, logQueue, exitFlag)
+            serverThread = ServerThread("Server Thread", c, myUUID, SERVER_HOST, SERVER_PORT, TYPE, logQueue, exitFlag)
             serverThread.start()
             threads.append(serverThread)
 
@@ -282,9 +279,9 @@ def main():
         except KeyboardInterrupt:
             break
 
-#    clientThread = ClientThread("Client Thread")
-#    clientThread.start()
-  #  threads.append(clientThread)
+    #    clientThread = ClientThread("Client Thread")
+    #    clientThread.start()
+    #  threads.append(clientThread)
 
     for t in threads:
         t.join()

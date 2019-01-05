@@ -31,8 +31,6 @@ logQueue = queue.Queue()
 
 
 
-
-
 userInfoDict = dict()
 myUUID=uuid.uuid4()
 print("my UUID = "+str(myUUID))
