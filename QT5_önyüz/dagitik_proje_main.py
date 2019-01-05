@@ -1,23 +1,23 @@
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 import sys
-
+from Aracı_Negotiator import Araci_with_2_threads, Araci_with_2_threads_Logger
 from QT5_önyüz.dagitik_proje_ui import Ui_MainWindow
-
+import threading
 my_blog_list = []
 
 
-class Test_Ui(QtWidgets.QMainWindow):
+
+class ProjectUi(QtWidgets.QMainWindow):
     def __init__(self):
         self.qt_app = QtWidgets.QApplication(sys.argv)
         QtWidgets.QWidget.__init__(self, None)
 
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
         # list1 =[]
+        self.ui.pushButton.pressed.connect(self.connect)
         self.ui.pushButton.pressed.connect(self.get_host_with_port)
         self.ui.pushButton.pressed.connect(self.change_profile_name)
-        # self.ui.pushButton_5.pressed.connect(self.share_twit_button)
         self.ui.pushButton.pressed.connect(self.disable_button)
         self.ui.pushButton_2.pressed.connect(self.logout_button)
         self.ui.pushButton_7.pressed.connect(self.subscribe_button)
@@ -25,6 +25,13 @@ class Test_Ui(QtWidgets.QMainWindow):
         self.ui.pushButton_4.pressed.connect(self.unblock_button)
         self.ui.pushButton_6.pressed.connect(self.block_button)
         self.ui.pushButton_9.pressed.connect(self.send_message_button)
+        self.ui.pushButton_5.pressed.connect(self.share_twit_button)
+
+        #self.list =QtWidgets.QListWidget(self)
+
+    def connect(self):
+        pass
+
 
     def refresh_feed_button(self):
         # takip edilen kişilerin serverlarına istek atarak twitleri yeniler
@@ -60,9 +67,21 @@ class Test_Ui(QtWidgets.QMainWindow):
 
     def get_host_with_port(self):
         # ip ve port alma işlemi
-        ip = self.ui.plainTextEdit.toPlainText()
-        port = self.ui.plainTextEdit_2.toPlainText()
-        # self.ui.plainTextEdit_2.setPlainText(ip)
+        ip = self.ui.lineEdit.text()
+        port = self.ui.lineEdit_2.text()
+        name = self.ui.lineEdit_3.text()
+
+        #self.ui.plainTextEdit_4.setPlainText(i)
+
+        for i in range(10):
+           self.ui.listWidget.addItem('Item %s' %(i+1))
+
+        #item = QtGui.QListWidgetItem()
+        item = QtWidgets.QListWidgetItem
+        item.setText(QtGui.QGuiApplication.translate("Dialog",'x',None,))
+        item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable)
+        item.setCheckState(QtCore.Qt.Unchecked)
+        self.listWidget.addItem(item)
 
     def change_profile_name(self):
         # kullanıcı adını bağlandığında otomatik olarak değiştirme
@@ -93,9 +112,9 @@ class Test_Ui(QtWidgets.QMainWindow):
     def suggest_user(self, number_of_suggest, userlist):
         # sayıya göre kullanıcı öneri listesini gösterme
 
-        #self.number_of_suggest = number_of_suggest
-        #self.userlist = userlist
-        #if userlist is None:
+        # self.number_of_suggest = number_of_suggest
+        # self.userlist = userlist
+        # if userlist is None:
         #    error_notification = 'Baglananan kullanıcı bulunmamaktadır.'
         #    self.ui.listWidget_6.addItems(error_notification)
         pass
@@ -106,7 +125,7 @@ class Test_Ui(QtWidgets.QMainWindow):
 
 
 def main():
-    app = Test_Ui()
+    app = ProjectUi()
     app.run()
 
 
