@@ -3,12 +3,16 @@ import queue
 import socket
 import time
 import uuid
+import json
+import sys
+sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
 import QT5_onyuz.dagitik_proje_main
+
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT = 12343
-SERVER_PORT2 = 12344
+SERVER_PORT = 12342
+SERVER_PORT2 = 12341
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -23,18 +27,22 @@ clientQueue = queue.Queue()
 
 
 userInfoDict = dict()
+with open('data.json', 'r') as fp:
+    userInfoDict = json.load(fp)
 myUUID = uuid.uuid4()
 print("my UUID = " + str(myUUID))
-tmpUUID = "yasemin"
-userInfoDict[tmpUUID] = ["yadress", "yPort", "yNanme", "yNEGOTIATOR"]
-tmpUUID = "orhan"
-userInfoDict[tmpUUID] = ["oadress", "oPort", "oNanme", "oNEGOTIATOR"]
+# tmpUUID="yasemin"
+# userInfoDict[tmpUUID]=["yadress", "yPort", "yNanme", "yNEGOTIATOR"]
+# tmpUUID="orhan"
+# userInfoDict[tmpUUID]=["oadress", "oPort", "oNanme", "oNEGOTIATOR"]
+# tmpUUID="a"
+# userInfoDict[tmpUUID]=["4", "4", "4", "4"]
 
 
-class arayüzthread(threading.Thread):
+class ArayuzThread(threading.Thread):
     def __init__(self):
         super().__init__()
-        self.Arayüz = QT5_onyuz.dagitik_proje_main.main()
+        self.arayuz = QT5_onyuz.dagitik_proje_main.main()
     def run(self):
         pass
 
@@ -99,7 +107,7 @@ class ServerThread(threading.Thread):
         if prot == "HELLO":
             response = "HELLO"
 
-        elif prot == "UINFO":  # YENI KULLANICI İSTEĞİ /KULLANICI BAĞLANTI KONTROLÜ
+        elif prot == "UINFO":  # YENI KULLANICI İSTEĞİ /KULLANICI BAĞLANTI KONTROLU
             paramIndex = request.find(":")
             print("UINFODAYIM= " + str(paramIndex))
             if (not paramIndex == -1):
@@ -119,6 +127,8 @@ class ServerThread(threading.Thread):
                     if str(response[6:]) == str(UUIDtoCheck):
                         msg = "CONOK"
                         userInfoDict[paramList[0]] = [paramList[1], paramList[2], paramList[3], paramList[4]]
+                        with open('data.json', 'w') as fp:
+                            json.dump(userInfoDict, fp)
                     else:
                         msg = "CONER"
 
@@ -134,7 +144,7 @@ class ServerThread(threading.Thread):
                 response = "ERROR"
 
 
-        elif prot == "CHECK":  # UUID KONTROLÜ
+        elif prot == "CHECK":  # UUID KONTROLU
             response = "MUUID" + ":" + str(myUUID)
 
         elif prot == "CONOK":  # INF :UUID TUTARLI
@@ -258,9 +268,9 @@ def main():
     userInputThread = UserInputThread("User Input Thread", logQueue)
     userInputThread.start()
 
-    arayüz = arayüzthread()
+    arayUz = ArayuzThread()
+    arayUz.start()
 
-    arayüz.start()
     # for i in range(2):
     while True:
         try:
