@@ -6,8 +6,8 @@ import uuid
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT =  12351
-SERVER_PORT2 = 12352
+SERVER_PORT =  12352
+SERVER_PORT2 = 12351
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -98,10 +98,12 @@ class ServerThread(threading.Thread):
                     response = "CHKED"
                 # userInfoList[paramList[0]]=list(paramList[1],paramList[2],paramList[3],paramList[4])
                 else: # BEKLE AZ SEN
+                    print("Else in icindeyim")
                     UUIDtoCheck=paramList[0]
                     # clientQueue.put("CHECK")
                     myClient=ClientThread("Client Thread",paramList[1],int(paramList[2]),"CHECK")
                     response=myClient.control()
+                    print("Client yaratildii")
                     print('RESPONSE:' + response)
                     print('UUID:' + UUIDtoCheck)
                     if str(response[6:]) == str(UUIDtoCheck):

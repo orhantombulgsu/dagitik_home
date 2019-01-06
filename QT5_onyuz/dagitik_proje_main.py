@@ -4,8 +4,9 @@ from Aracı_Negotiator import Araci_with_2_threads, Araci_with_2_threads_Logger
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 import threading
 my_blog_list = []
+import queue
 
-
+logQueue = queue.Queue()
 
 class ProjectUi(QtWidgets.QMainWindow):
     def __init__(self):
@@ -30,7 +31,11 @@ class ProjectUi(QtWidgets.QMainWindow):
         #self.list =QtWidgets.QListWidget(self)
 
     def connect(self):
-        pass
+        myClient = Araci_with_2_threads_Logger.ClientThread("Client Thread", Araci_with_2_threads_Logger.SERVER_HOST, Araci_with_2_threads_Logger.SERVER_PORT2, "UINFO", Araci_with_2_threads_Logger.logQueue)
+        response = myClient.control()
+        print("Response " + response)
+        #myClient.join()
+
 
 
     def refresh_feed_button(self):

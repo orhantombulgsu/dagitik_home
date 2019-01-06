@@ -3,12 +3,15 @@ import queue
 import socket
 import time
 import uuid
+import sys
+sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
 import QT5_onyuz.dagitik_proje_main
+
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT = 12343
-SERVER_PORT2 = 12344
+SERVER_PORT = 12367
+SERVER_PORT2 = 12368
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -18,6 +21,7 @@ NAME = "MUSTAFA"
 
 serverQueue = queue.Queue()
 clientQueue = queue.Queue()
+logQueue = queue.Queue()
 
 # uuid.NAMESPACE_DNS.hex # dagdelenin metodu(MAC E göre)
 
@@ -31,10 +35,10 @@ tmpUUID = "orhan"
 userInfoDict[tmpUUID] = ["oadress", "oPort", "oNanme", "oNEGOTIATOR"]
 
 
-class arayüzthread(threading.Thread):
+class arayuzThread(threading.Thread):
     def __init__(self):
         super().__init__()
-        self.Arayüz = QT5_onyuz.dagitik_proje_main.main()
+        self.Arayuz = QT5_onyuz.dagitik_proje_main.main()
     def run(self):
         pass
 
@@ -87,7 +91,9 @@ class ServerThread(threading.Thread):
                 self.logQueue.put(time.ctime() + "\t\t - " + log)
                 msgToSend = str(self.readerParser(msgReiceved))
                 if len(msgToSend) >= 5:
+                    print(msgToSend + " server mesajini gonderdi\n")
                     self.mySocket.send((msgToSend).encode())
+                    print(msgToSend + " server mesajini gonderdi\n")
                     log = "Server thread sent a message : " + msgToSend
                     self.logQueue.put(time.ctime() + "\t\t - " + log)
 
@@ -110,10 +116,12 @@ class ServerThread(threading.Thread):
                     response = "CHKED"
                 # userInfoList[paramList[0]]=list(paramList[1],paramList[2],paramList[3],paramList[4])
                 else:  # BEKLE AZ SEN
+                    print("Else in icindeyim")
                     UUIDtoCheck = paramList[0]
                     # clientQueue.put("CHECK")
-                    myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), "CHECK", self.logQueue)
+                    myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), "CHECK", logQueue)
                     response = myClient.control()
+                    print("Client yaratildii")
                     print('RESPONSE:' + response)
                     print('UUID:' + UUIDtoCheck)
                     if str(response[6:]) == str(UUIDtoCheck):
@@ -135,6 +143,7 @@ class ServerThread(threading.Thread):
 
 
         elif prot == "CHECK":  # UUID KONTROLÜ
+            print("Check alindi\n")
             response = "MUUID" + ":" + str(myUUID)
 
         elif prot == "CONOK":  # INF :UUID TUTARLI
@@ -206,8 +215,11 @@ class ClientThread(threading.Thread):
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         # print(s.recv(1024).decode())  # blocking'dir
         mySocket.send((textToSend.strip()).encode())
+        print(textToSend+" gonderildii")
         response = ((mySocket.recv(1024)).decode()).strip()
+        print("Messaj alindi  " + response)
         mySocket.close()  # Close the socket when done
+        print("\nSoket kapandi")
         if (response[:5] == "LSUOK"):
             pass
 
@@ -215,6 +227,7 @@ class ClientThread(threading.Thread):
             print("ClientThread " + response + " ClientThread")
             log = self.threadName + " : " + "response is " + response
             self.logQueue.put(time.ctime() + "\t\t - " + log)
+            print("Control RESPONSE " + response)
             return response
         log = self.threadName + " : " + "response is " + ""
         self.logQueue.put(time.ctime() + "\t\t - " + log)
@@ -234,7 +247,7 @@ class UserInputThread(threading.Thread):
             request = input("Enter your request > ")
             log = self.threadName + " : " + "Input request is " + request
             self.logQueue.put(time.ctime() + "\t\t - " + log)
-            myClient = ClientThread("Client Thread", SERVER_HOST, SERVER_PORT2, request, self.logQueue)
+            myClient = ClientThread("Client Thread", SERVER_HOST, SERVER_PORT2, request, logQueue)
             response = myClient.control()
 
 
@@ -249,18 +262,20 @@ def main():
     mySocket.listen(5)  # Now wait for client connection,
     # with 5 queued connections at most
 
-    logQueue = queue.Queue()
+    #logQueue = queue.Queue()
     exitFlag = False
 
     Logger = loggerThread("Logger", "log.txt", logQueue, exitFlag)
     Logger.start()
+    threads.append(Logger)
 
-    userInputThread = UserInputThread("User Input Thread", logQueue)
-    userInputThread.start()
+    #userInputThread = UserInputThread("User Input Thread", logQueue)
+    #userInputThread.start()
 
-    arayüz = arayüzthread()
+    arayuz = arayuzThread()
 
-    arayüz.start()
+    arayuz.start()
+    threads.append(arayuz)
     # for i in range(2):
     while True:
         try:
