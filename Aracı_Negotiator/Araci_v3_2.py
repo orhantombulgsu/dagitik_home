@@ -11,8 +11,8 @@ import QT5_onyuz.dagitik_proje_main
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT = 12342
-SERVER_PORT2 = 12341
+SERVER_PORT = 12352
+SERVER_PORT2 = 12351
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -268,8 +268,8 @@ def main():
     userInputThread = UserInputThread("User Input Thread", logQueue)
     userInputThread.start()
 
-    arayUz = ArayuzThread()
-    arayUz.start()
+    # arayUz = ArayuzThread()
+    # arayUz.start()
 
     # for i in range(2):
     while True:

@@ -1,0 +1,102 @@
+Sun Jan  6 01:41:34 2019 - Logger starting.
+Sun Jan  6 01:41:34 2019 - Sun Jan  6 01:41:34 2019		 - User Input Thread : is starting.
+Sun Jan  6 01:41:34 2019 - Sun Jan  6 01:41:34 2019		 - Waiting for connection from any client via port number 12343
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - User Input Thread : Input request is HELLO
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Client Thread : is controlling.
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Client Thread : sending a message : HELLO
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Got connection from ('127.0.0.1', 49496)
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Server thread starting.
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Waiting for connection from any client via port number 12343
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Server thread received a message : HELLO
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Server thread : HELLO
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Server thread sent a message : HELLO
+Sun Jan  6 01:42:05 2019 - Sun Jan  6 01:42:05 2019		 - Client Thread : response is HELLO
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - User Input Thread : Input request is LSUSR
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Client Thread : is controlling.
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Client Thread : sending a message : LSUSR
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Got connection from ('127.0.0.1', 49498)
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Server thread starting.
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Waiting for connection from any client via port number 12343
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Server thread received a message : LSUSR
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Server thread : LSUOK:a,4,4,4,4$yasemin,yadress,yPort,yName,yNEGOTIATOR$7afe5e95-2e66-49f5-a4b2-d8ff7e25dd39,127.0.0.1,12341,MUSTAFA,NEGOTIATOR$orhan,oadress,oPort,oName,oNEGOTIATOR$c966c62f-c806-4a3f-8b05-ad74268276f6,127.0.0.1,12342,MUSTAFA,NEGOTIATOR
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Client Thread : response is LSUOK:a,4,4,4,4$yasemin,yadress,yPort,yName,yNEGOTIATOR$7afe5e95-2e66-49f5-a4b2-d8ff7e25dd39,127.0.0.1,12341,MUSTAFA,NEGOTIATOR$orhan,oadress,oPort,oName,oNEGOTIATOR$c966c62f-c806-4a3f-8b05-ad74268276f6,127.0.0.1,12342,MUSTAFA,NEGOTIATOR
+Sun Jan  6 01:42:22 2019 - Sun Jan  6 01:42:22 2019		 - Server thread sent a message : LSUOK:a,4,4,4,4$yasemin,yadress,yPort,yName,yNEGOTIATOR$7afe5e95-2e66-49f5-a4b2-d8ff7e25dd39,127.0.0.1,12341,MUSTAFA,NEGOTIATOR$orhan,oadress,oPort,oName,oNEGOTIATOR$c966c62f-c806-4a3f-8b05-ad74268276f6,127.0.0.1,12342,MUSTAFA,NEGOTIATOR
+Sun Jan  6 01:42:34 2019 - Sun Jan  6 01:42:34 2019		 - Got connection from ('127.0.0.1', 49504)
+Sun Jan  6 01:42:34 2019 - Sun Jan  6 01:42:34 2019		 - Server thread starting.
+Sun Jan  6 01:42:34 2019 - Sun Jan  6 01:42:34 2019		 - Server thread received a message : HELLO
+Sun Jan  6 01:42:34 2019 - Sun Jan  6 01:42:34 2019		 - Waiting for connection from any client via port number 12343
+Sun Jan  6 01:42:34 2019 - Sun Jan  6 01:42:34 2019		 - Server thread : HELLO
+Sun Jan  6 01:42:34 2019 - Sun Jan  6 01:42:34 2019		 - Server thread sent a message : HELLO
+Sun Jan  6 01:42:38 2019 - Sun Jan  6 01:42:38 2019		 - Got connection from ('127.0.0.1', 49510)
+Sun Jan  6 01:42:39 2019 - Sun Jan  6 01:42:39 2019		 - Server thread starting.
+Sun Jan  6 01:42:39 2019 - Sun Jan  6 01:42:39 2019		 - Waiting for connection from any client via port number 12343
+Sun Jan  6 01:42:39 2019 - Sun Jan  6 01:42:39 2019		 - Server thread received a message : LSUSR
+Sun Jan  6 01:42:39 2019 - Sun Jan  6 01:42:39 2019		 - Server thread : LSUOK:a,4,4,4,4$yasemin,yadress,yPort,yName,yNEGOTIATOR$7afe5e95-2e66-49f5-a4b2-d8ff7e25dd39,127.0.0.1,12341,MUSTAFA,NEGOTIATOR$orhan,oadress,oPort,oName,oNEGOTIATOR$c966c62f-c806-4a3f-8b05-ad74268276f6,127.0.0.1,12342,MUSTAFA,NEGOTIATOR
+Sun Jan  6 01:42:39 2019 - Sun Jan  6 01:42:39 2019		 - Server thread sent a message : LSUOK:a,4,4,4,4$yasemin,yadress,yPort,yName,yNEGOTIATOR$7afe5e95-2e66-49f5-a4b2-d8ff7e25dd39,127.0.0.1,12341,MUSTAFA,NEGOTIATOR$orhan,oadress,oPort,oName,oNEGOTIATOR$c966c62f-c806-4a3f-8b05-ad74268276f6,127.0.0.1,12342,MUSTAFA,NEGOTIATOR
+Sun Jan  6 01:43:03 2019 - Sun Jan  6 01:43:03 2019		 - Got connection from ('127.0.0.1', 49518)
+Sun Jan  6 01:43:03 2019 - Sun Jan  6 01:43:03 2019		 - Server thread starting.
+Sun Jan  6 01:43:03 2019 - Sun Jan  6 01:43:03 2019		 - Server thread received a message : QUIRR
+Sun Jan  6 01:43:03 2019 - Sun Jan  6 01:43:03 2019		 - Waiting for connection from any client via port number 12343
+Sun Jan  6 01:43:03 2019 - Sun Jan  6 01:43:03 2019		 - Server thread : ERROR
+Sun Jan  6 01:43:03 2019 - Sun Jan  6 01:43:03 2019		 - Server thread sent a message : ERROR
+Sun Jan  6 01:43:05 2019 - Sun Jan  6 01:43:05 2019		 - Got connection from ('127.0.0.1', 49520)
+Sun Jan  6 01:43:06 2019 - Sun Jan  6 01:43:06 2019		 - Server thread starting.
+Sun Jan  6 01:43:06 2019 - Sun Jan  6 01:43:06 2019		 - Waiting for connection from any client via port number 12343
+Sun Jan  6 01:43:06 2019 - Sun Jan  6 01:43:06 2019		 - Server thread received a message : QUITT
+Sun Jan  6 01:43:06 2019 - Logger thread : OUITT received.
+Sun Jan  6 01:43:06 2019 - Thread-1exiting.
+Tue Jan  8 01:33:18 2019 - Logger starting.
+Tue Jan  8 01:33:18 2019 - Tue Jan  8 01:33:18 2019		 - User Input Thread : is starting.
+Tue Jan  8 01:33:18 2019 - Tue Jan  8 01:33:18 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Got connection from ('127.0.0.1', 43356)
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread starting.
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread received a message : UINFO:2b0d3d4f-7043-4680-8b15-16d587a001f4$127.0.0.1$12351$MUSTAFA$NEGOTIATOR
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Client Thread : is controlling.
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Client Thread : sending a message : CHECK
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Client Thread : response is MUUID:2b0d3d4f-7043-4680-8b15-16d587a001f4
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread : UUIDs checked.   CONOK
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread : MUUID:2b0d3d4f-7043-4680-8b15-16d587a001f4
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread sent a message : MUUID:2b0d3d4f-7043-4680-8b15-16d587a001f4
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Got connection from ('127.0.0.1', 43360)
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread starting.
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread received a message : UINFO:2b0d3d4f-7043-4680-8b15-16d587a001f4$127.0.0.1$12351$MUSTAFA$NEGOTIATOR
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread : CHKED
+Tue Jan  8 01:35:07 2019 - Tue Jan  8 01:35:07 2019		 - Server thread sent a message : CHKED
+Tue Jan  8 01:35:14 2019 - Tue Jan  8 01:35:14 2019		 - Got connection from ('127.0.0.1', 43362)
+Tue Jan  8 01:35:14 2019 - Tue Jan  8 01:35:14 2019		 - Server thread starting.
+Tue Jan  8 01:35:14 2019 - Tue Jan  8 01:35:14 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:35:14 2019 - Tue Jan  8 01:35:14 2019		 - Server thread received a message : LSUSR
+Tue Jan  8 01:35:14 2019 - Tue Jan  8 01:35:14 2019		 - Server thread : LSUOK:2b0d3d4f-7043-4680-8b15-16d587a001f4,127.0.0.1,12351,MUSTAFA,NEGOTIATOR$orhan,oadress,oPort,oName,oNEGOTIATOR$99725eb7-864c-43c8-a03e-ccb6827d87d9,127.0.0.1,12351,MUSTAFA,NEGOTIATOR$c966c62f-c806-4a3f-8b05-ad74268276f6,127.0.0.1,12342,MUSTAFA,NEGOTIATOR$7afe5e95-2e66-49f5-a4b2-d8ff7e25dd39,127.0.0.1,12341,MUSTAFA,NEGOTIATOR
+Tue Jan  8 01:35:14 2019 - Tue Jan  8 01:35:14 2019		 - Server thread sent a message : LSUOK:2b0d3d4f-7043-4680-8b15-16d587a001f4,127.0.0.1,12351,MUSTAFA,NEGOTIATOR$orhan,oadress,oPort,oName,oNEGOTIATOR$99725eb7-864c-43c8-a03e-ccb6827d87d9,127.0.0.1,12351,MUSTAFA,NEGOTIATOR$c966c62f-c806-4a3f-8b05-ad74268276f6,127.0.0.1,12342,MUSTAFA,NEGOTIATOR$7afe5e95-2e66-49f5-a4b2-d8ff7e25dd39,127.0.0.1,12341,MUSTAFA,NEGOTIATOR
+Tue Jan  8 01:35:40 2019 - Tue Jan  8 01:35:40 2019		 - Got connection from ('127.0.0.1', 43364)
+Tue Jan  8 01:35:40 2019 - Tue Jan  8 01:35:40 2019		 - Server thread starting.
+Tue Jan  8 01:35:40 2019 - Tue Jan  8 01:35:40 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:35:40 2019 - Tue Jan  8 01:35:40 2019		 - Server thread received a message : HELLO
+Tue Jan  8 01:35:40 2019 - Tue Jan  8 01:35:40 2019		 - Server thread : HELLO
+Tue Jan  8 01:35:40 2019 - Tue Jan  8 01:35:40 2019		 - Server thread sent a message : HELLO
+Tue Jan  8 01:36:46 2019 - Tue Jan  8 01:36:46 2019		 - Got connection from ('127.0.0.1', 43366)
+Tue Jan  8 01:36:46 2019 - Tue Jan  8 01:36:46 2019		 - Server thread starting.
+Tue Jan  8 01:36:46 2019 - Tue Jan  8 01:36:46 2019		 - Server thread received a message : CHECK
+Tue Jan  8 01:36:46 2019 - Tue Jan  8 01:36:46 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:36:46 2019 - Tue Jan  8 01:36:46 2019		 - Server thread : MUUID:6cc1199d-b051-4611-9c62-945e31482c84
+Tue Jan  8 01:36:46 2019 - Tue Jan  8 01:36:46 2019		 - Server thread sent a message : MUUID:6cc1199d-b051-4611-9c62-945e31482c84
+Tue Jan  8 01:36:58 2019 - Tue Jan  8 01:36:58 2019		 - Got connection from ('127.0.0.1', 43368)
+Tue Jan  8 01:36:58 2019 - Tue Jan  8 01:36:58 2019		 - Server thread starting.
+Tue Jan  8 01:36:58 2019 - Tue Jan  8 01:36:58 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:36:58 2019 - Tue Jan  8 01:36:58 2019		 - Server thread received a message : CONOK
+Tue Jan  8 01:36:58 2019 - Tue Jan  8 01:36:58 2019		 - Server thread : HELLO
+Tue Jan  8 01:36:58 2019 - Tue Jan  8 01:36:58 2019		 - Server thread sent a message : HELLO
+Tue Jan  8 01:37:03 2019 - Tue Jan  8 01:37:03 2019		 - Got connection from ('127.0.0.1', 43370)
+Tue Jan  8 01:37:03 2019 - Tue Jan  8 01:37:03 2019		 - Server thread starting.
+Tue Jan  8 01:37:03 2019 - Tue Jan  8 01:37:03 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:37:03 2019 - Tue Jan  8 01:37:03 2019		 - Server thread received a message : CONER
+Tue Jan  8 01:37:03 2019 - Tue Jan  8 01:37:03 2019		 - Server thread : BYBYE
+Tue Jan  8 01:37:03 2019 - Tue Jan  8 01:37:03 2019		 - Server thread sent a message : BYBYE
+Tue Jan  8 01:37:17 2019 - Tue Jan  8 01:37:17 2019		 - Got connection from ('127.0.0.1', 43372)
+Tue Jan  8 01:37:17 2019 - Tue Jan  8 01:37:17 2019		 - Server thread starting.
+Tue Jan  8 01:37:17 2019 - Tue Jan  8 01:37:17 2019		 - Waiting for connection from any client via port number 12352
+Tue Jan  8 01:37:17 2019 - Tue Jan  8 01:37:17 2019		 - Server thread received a message : QUITT
+Tue Jan  8 01:37:17 2019 - Logger thread : OUITT received.
+Tue Jan  8 01:37:17 2019 - Thread-1exiting.
