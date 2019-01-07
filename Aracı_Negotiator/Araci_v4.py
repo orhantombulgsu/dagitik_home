@@ -334,7 +334,7 @@ class ServerThread(threading.Thread):
                 i += 1
             paramList = paramList[:-1]
             response = "LSUOK" + ":" + paramList
-        elif prot == "QUITT":
+        elif prot == "QUITT": 
             response = "EXITT"
             exitFlag = True
             self.logQueue.put("QUITT")
