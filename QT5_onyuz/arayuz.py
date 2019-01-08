@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 from Aracı_Negotiator import Araci_v5 as ar
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
+
 my_blog_list = []
 
 import threading
@@ -10,12 +11,9 @@ import time
 import sys
 
 
-
-
-
 class ProjectUi(QtWidgets.QMainWindow):
-    def __init__(self,logQueue):
-        self.logQueue=logQueue
+    def __init__(self, logQueue):
+        self.logQueue = logQueue
 
         self.qt_app = QtWidgets.QApplication(sys.argv)
         QtWidgets.QWidget.__init__(self, None)
@@ -23,30 +21,29 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         # list1 =[]
-        self.ui.pushButton.pressed.connect(self.connect)
-        # self.ui.pushButton.pressed.connect(self.get_host_with_port)
-        self.ui.pushButton.pressed.connect(self.change_profile_name)
-        # self.ui.pushButton.pressed.connect(self.disable_button)
-        self.ui.pushButton_2.pressed.connect(self.logout_button)
-        self.ui.pushButton_7.pressed.connect(self.subscribe_button)
-        self.ui.pushButton_3.pressed.connect(self.unsubscribe_button)
-        self.ui.pushButton_4.pressed.connect(self.unblock_button)
-        self.ui.pushButton_6.pressed.connect(self.block_button)
-        self.ui.pushButton_9.pressed.connect(self.send_message_button)
-        self.ui.pushButton_5.pressed.connect(self.share_twit_button)
+        self.ui.connect_button.pressed.connect(self.connect)
+        # self.ui.connect_button.pressed.connect(self.get_host_with_port)
+        self.ui.connect_button.pressed.connect(self.change_profile_name)
+        # self.ui.connect_button.pressed.connect(self.disable_button)
+        self.ui.LogOut_button.pressed.connect(self.logout_button)
+        self.ui.Subscribe_button.pressed.connect(self.subscribe_button)
+        self.ui.UnSubscribe_button.pressed.connect(self.unsubscribe_button)
+        self.ui.UnBlock_button.pressed.connect(self.unblock_button)
+        self.ui.Block_button.pressed.connect(self.block_button)
+        self.ui.SendMessage_button.pressed.connect(self.send_message_button)
+        self.ui.Share_button.pressed.connect(self.share_twit_button)
         self.initializeIpPort()
 
-        #self.list =QtWidgets.QListWidget(self)
+        # self.list =QtWidgets.QListWidget(self)
 
     def initializeIpPort(self):
-        self.ui.lineEdit.setText("127.0.0.1")
-        self.ui.lineEdit_2.setText("12342")
-        self.ui.lineEdit_3.setText("Mustafa")
+        self.ui.ip_field.setText("127.0.0.1")
+        self.ui.port_field.setText("12341")
+        self.ui.username_field.setText("Mustafa")
 
     def connect(self):
         self.get_host_with_port()
         pass
-
 
     def refresh_feed_button(self):
         # takip edilen kişilerin serverlarına istek atarak twitleri yeniler
@@ -78,26 +75,26 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.close()
 
     def disable_button(self):
-        self.ui.pushButton.setDisabled(True)
+        self.ui.connect_button.setDisabled(True)
 
     def get_host_with_port(self):
         # ip ve port alma işlemi
-        self.ip = self.ui.lineEdit.text()
-        self.port = self.ui.lineEdit_2.text()
-        name = self.ui.lineEdit_3.text()
+        self.ip = self.ui.ip_field.text()
+        self.port = self.ui.port_field.text()
+        name = self.ui.username_field.text()
 
-        request="UINFO"
+        request = "UINFO"
         myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
-        self.ui.listWidget.addItem("XXX"+response+"XXX")
+        self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
 
-        #self.ui.plainTextEdit_4.setPlainText(i)
+        # self.ui.plainTextEdit_4.setPlainText(i)
 
         # for i in range(10):
         #    self.ui.listWidget.addItem('Item %s' %(i+1))
 
-        #item = QtGui.QListWidgetItem()
+        # item = QtGui.QListWidgetItem()
         # item = QtWidgets.QListWidgetItem0
         # item.setText(QtGui.QGuiApplication.translate("Dialog",'x',None,))
         # item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable)
@@ -106,16 +103,16 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def change_profile_name(self):
         # kullanıcı adını bağlandığında otomatik olarak değiştirme
-        username = self.ui.lineEdit_3.text()
-        self.ui.label_2.setText(username)
+        username = self.ui.username_field.text()
+        self.ui.UserNameLabel_field.setText(username)
 
     def share_twit_button(self):
-        text = self.ui.plainTextEdit_4.toPlainText()
-        request=text.strip()
+        text = self.ui.Twit_field.toPlainText()
+        request = text.strip()
         myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
-        self.ui.listWidget.addItem("XXX"+response+"XXX")
+        self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
 
         pass
         '''
@@ -160,8 +157,6 @@ class ArayuzThread(threading.Thread):
         app.run()
 
 
-
-
 def main():
     threads = []
     # ana soket oluşturuluyor ve hangi iplerden bağlantı kabul edileceği, port numarası bilgileri giriliyor..
@@ -195,7 +190,8 @@ def main():
             log = "Got connection from " + str(addr)
             logQueue.put(time.ctime() + "\t\t - " + log)
             print('Got connection from', addr)
-            serverThread = ar.ServerThread("Server Thread", c, ar.myUUID, ar.SERVER_HOST, ar.SERVER_PORT, ar.TYPE, logQueue, exitFlag)
+            serverThread = ar.ServerThread("Server Thread", c, ar.myUUID, ar.SERVER_HOST, ar.SERVER_PORT, ar.TYPE,
+                                           logQueue, exitFlag)
             serverThread.start()
             threads.append(serverThread)
 
