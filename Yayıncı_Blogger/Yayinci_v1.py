@@ -7,12 +7,39 @@ import json
 import sys
 
 sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
+
 import QT5_onyuz.dagitik_proje_main
+
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 from Aracı_Negotiator import Araci_with_2_threads, Araci_with_2_threads_Logger
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 import threading
+from Crypto.PublicKey import RSA
+from Crypto import Random
+from Crypto.Hash import SHA256
+
+random_generator = Random.new().read
+
+f_priv = open('id_rsa','w+')
+f_pub = open('id_rsa.pub','w+')
+
+if(f_priv and f_pub):
+    private_key = f_priv.read()
+    public_key = f_pub.read()
+    if(private_key == ""):
+        new_key = RSA.generate(2048, randfunc=random_generator)
+        public_key = new_key.publickey()
+        f_pub.write(public_key.exportKey().decode())
+        print(public_key.exportKey("PEM"))
+        private_key = new_key
+        f_priv.write(private_key.exportKey().decode())
+        print(new_key.exportKey("PEM"))
+
+f_priv.close()
+f_pub.close()
+
+
 my_blog_list = []
 
 
@@ -152,14 +179,16 @@ class ProjectUi(QtWidgets.QMainWindow):
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT = 12351
-SERVER_PORT2 = 12352
+SERVER_PORT = 12328
+SERVER_PORT2 = 12327
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
-TYPE = "NEGOTIATOR"
+TYPE = "YAYINCI"
 
 NUMBER_OF_USERLIST = 5
 NAME = "MUSTAFA"
+
+STATUS = 0
 
 serverQueue = queue.Queue()
 clientQueue = queue.Queue()
@@ -229,6 +258,7 @@ class ServerThread(threading.Thread):
         self.logQueue = logQueue
         self.exitFlag = exitFlag
 
+
     def run(self):
         log = "Server thread starting."
         self.logQueue.put(time.ctime() + "\t\t - " + log)
@@ -248,6 +278,10 @@ class ServerThread(threading.Thread):
     def readerParser(self, request):
         prot = request[:5]
         response = ""
+        global STATUS
+        #pk=RSA.generate(2048)
+        pub = ""
+
 
         print("ReaderParser " + request + " ReaderParser")
         if prot == "HELLO":
@@ -262,6 +296,7 @@ class ServerThread(threading.Thread):
                 # print("paramList[0]= "+ str(paramList[0]))
                 if paramList[0] in userInfoDict.keys():
                     response = "CHKED"
+
                 # userInfoList[paramList[0]]=list(paramList[1],paramList[2],paramList[3],paramList[4])
                 else:  # BEKLE AZ SEN
                     UUIDtoCheck = paramList[0]
@@ -272,11 +307,13 @@ class ServerThread(threading.Thread):
                     print('UUID:' + UUIDtoCheck)
                     if str(response[6:]) == str(UUIDtoCheck):
                         msg = "CONOK"
+                        STATUS = 1
                         userInfoDict[paramList[0]] = [paramList[1], paramList[2], paramList[3], paramList[4]]
                         with open('data.json', 'w') as fp:
                             json.dump(userInfoDict, fp)
                     else:
                         msg = "CONER"
+                        STATUS = 0
 
                     self.mySocket.send(((msg).strip()).encode())
                     log = "Server thread : " + "UUIDs checked.   " + msg
@@ -294,9 +331,11 @@ class ServerThread(threading.Thread):
             response = "MUUID" + ":" + str(myUUID)
 
         elif prot == "CONOK":  # INF :UUID TUTARLI
+            STATUS = 1
             response = "HELLO"
 
         elif prot == "CONER":  # INF: UUID FARKLI
+            STATUS = 0
             response = "BYBYE"
 
         elif prot == "LSUSR":  # KULLANICI LISTE PAYLASIMI
@@ -316,10 +355,60 @@ class ServerThread(threading.Thread):
                 i += 1
             paramList = paramList[:-1]
             response = "LSUOK" + ":" + paramList
-        elif prot == "QUITT": 
+        elif prot == "QUITT":
             response = "EXITT"
             exitFlag = True
             self.logQueue.put("QUITT")
+
+
+        ##BURDAN ITIBAREN YAYINCI ICIN OLANLAR
+        elif prot == "PBKEY":       #public_key paylasimi
+            if(STATUS == 0):
+                response = "CFAIL"
+            else:
+                response = "MYPUB " + str(public_key)
+
+        elif prot == "SIGNT":       #public_key kontrolu
+            if(STATUS == 0):
+                response = "CFAIL"
+            else:
+                text_sign = request[7:]
+                hash = SHA256.new(text_sign.encode()).digest()
+                signature = private_key.sign(hash, '')
+                response = "SIGND "+ str(signature)
+
+        elif prot == "MYPUB":   #karisdan pk geldi ama string bunu rsa objesine cevirmeyi yapamadim.
+            pub = request[7:]
+            #pk = RSA.generate(2048, pub)
+            print("PKKKKKK" + pub)
+            response = "SIGNT " + "abc"
+
+        elif prot == "SIGND":       #bu mesaj geldiginde yukaridaki gelen public key ile acmak gerekiyor yapamadim.
+            print("SIGND geldiiiiiiiiiiiiiiiiiii\n")
+            if(STATUS == 0):
+                response = "CFAIL"
+            else:
+                text_sign = request[7:]
+                hash = SHA256.new(text_sign.encode()).digest()
+                if(pub.verify(hash, request[7:])==True):
+                    response = "PUBOK"
+                else:
+                    response = "PUBER"
+
+        elif prot == "PUBOK":
+            if(STATUS == 0):
+                response = "CFAIL"
+            else:
+                response = ""
+
+        elif prot == "PUBER":
+            if(STATUS == 0):
+                response = "CFAIL"
+            else:
+                response = ""
+
+
+
 
         else:
             response = "ERROR"
