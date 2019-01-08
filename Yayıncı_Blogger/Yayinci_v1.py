@@ -6,7 +6,7 @@ import uuid
 import json
 import sys
 
-sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
+sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
 
 import QT5_onyuz.dagitik_proje_main
 
@@ -19,8 +19,8 @@ from Crypto.PublicKey import RSA
 from Crypto import Random
 from Crypto.Hash import SHA256
 
-random_generator = Random.new().read
 
+random_generator = Random.new().read
 f_priv = open('id_rsa','w+')
 f_pub = open('id_rsa.pub','w+')
 

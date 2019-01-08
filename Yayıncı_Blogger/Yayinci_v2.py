@@ -9,10 +9,42 @@ import json
 # sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
 # import QT5_onyuz.dagitik_proje_main
 
+from Crypto.PublicKey import RSA
+from Crypto import Random
+from Crypto.Hash import SHA256
+
+
+
+random_generator = Random.new().read
+f_priv = open('id_rsa','w+')
+f_pub = open('id_rsa.pub','w+')
+
+if(f_priv and f_pub):
+    private_key = f_priv.read()
+    public_key = f_pub.read()
+    if(private_key == ""):
+        new_key = RSA.generate(2048, randfunc=random_generator)
+        public_key = new_key.publickey()
+        f_pub.write(public_key.exportKey().decode())
+        # print(public_key.exportKey("PEM"))
+        private_key = new_key
+        f_priv.write(private_key.exportKey().decode())
+        # print(new_key.exportKey("PEM"))
+
+f_priv.close()
+f_pub.close()
+
+
+my_blog_list = []
+
+
+STATUS = 0
+
+
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT  = 12341
-SERVER_PORT2 = 12342
+SERVER_PORT  = 12351
+SERVER_PORT2 = 12352
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -101,6 +133,7 @@ class ServerThread(threading.Thread):
     def readerParser(self, request):
         prot = request[:5]
         response = ""
+        global STATUS
 
         if prot == "HELLO":
             response = "HELLO"
@@ -124,13 +157,14 @@ class ServerThread(threading.Thread):
                     # print('UUID:' + UUIDtoCheck)
                     if str(response[6:]) == str(UUIDtoCheck):
                         msg = "CONOK"
+                        STATUS = 1
                         userInfoDict[paramList[0]] = [paramList[1], paramList[2], paramList[3], paramList[4]]
                         with open('data.json', 'w') as fp:
                             json.dump(userInfoDict, fp)
                     else:
                         msg = "CONER"
 
-                    print("ServerThread:GönderilenMesajj=" + msg)
+                    print("ServerThread:GönderilenMesaj=" + msg)
                     self.mySocket.send(((msg).strip()).encode())
                     log = "Server thread : " + "UUIDs checked.   " + msg
                     self.logQueue.put(time.ctime() + "\t\t - " + log)
@@ -174,6 +208,79 @@ class ServerThread(threading.Thread):
             response = "EXITT"
             exitFlag = True
             self.logQueue.put("QUITT")
+
+
+
+        ##BURDAN ITIBAREN YAYINCI ICIN OLANLAR
+        elif prot == "PBKEY":  # public_key paylasimi
+            if (STATUS == 0):
+                response = "CFAIL"
+            else:
+                paramIndex = request.find(":")
+                # print("UINFODAYIM= " + str(paramIndex))
+                if (not paramIndex == -1):
+                    # print("paramiGectimBenreaderPArserim " + request + " ServerReaderThread")
+                    paramList = ((request[paramIndex + 1:]).strip()).split('$')
+                    msgToSign=paramList[0]
+                    hash = SHA256.new(msgToSign.encode()).digest()
+                    signature = private_key.sign(hash, '')
+                    # msgToSend = "MYPUB:" + str( (public_key.exportKey()).decode() ) + '$' + signature
+                    pkstring = public_key.exportKey("PEM")
+                    print(pkstring[1:])
+                    msgToSend = "MYPUB:" + pkstring.decode("utf-8") + '$' + signature
+                    myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), msgToSend, self.logQueue)
+                    response = myClient.control()
+                    if response[:5] == "PUBOK":
+                        print("PUBOK GELDİİ")
+                    elif response[:5] =="PUBER":
+                        print("PUBER GELDİİ")
+                    response=""
+
+                else:
+                    response = "ERROR"
+
+
+        elif prot == "SIGNT":  # public_key kontrolu
+            if (STATUS == 0):
+                response = "CFAIL"
+            else:
+                text_sign = request[7:]
+                hash = SHA256.new(text_sign.encode()).digest()
+                signature = private_key.sign(hash, '')
+                response = "SIGND " + str(signature)
+
+        elif prot == "MYPUB":  # karisdan pk geldi ama string bunu rsa objesine cevirmeyi yapamadim.
+            pub = request[7:]
+            # pk = RSA.generate(2048, pub)
+            print("PKKKKKK" + pub)
+            response = "SIGNT " + "abc"
+
+        elif prot == "SIGND":  # bu mesaj geldiginde yukaridaki gelen public key ile acmak gerekiyor yapamadim.
+            print("SIGND geldiiiiiiiiiiiiiiiiiii\n")
+            if (STATUS == 0):
+                response = "CFAIL"
+            else:
+                text_sign = request[7:]
+                hash = SHA256.new(text_sign.encode()).digest()
+                if (public_key.verify(hash, request[7:]) == True):
+                    response = "PUBOK"
+                else:
+                    response = "PUBER"
+
+        elif prot == "PUBOK":
+            if (STATUS == 0):
+                response = "CFAIL"
+            else:
+                response = ""
+
+        elif prot == "PUBER":
+            if (STATUS == 0):
+                response = "CFAIL"
+            else:
+                response = ""
+
+
+
 
         else:
             response = "ERROR"

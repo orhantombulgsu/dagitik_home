@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
 
 from PyQt5 import QtWidgets, QtGui, QtCore
-from Aracı_Negotiator import Araci_v5 as ar
+from Yayıncı_Blogger import Yayinci_v2 as yay
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 my_blog_list = []
 
@@ -41,7 +41,7 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def initializeIpPort(self):
         self.ui.lineEdit.setText("127.0.0.1")
-        self.ui.lineEdit_2.setText("12342")
+        self.ui.lineEdit_2.setText("12352")
         self.ui.lineEdit_3.setText("Mustafa")
 
     def connect(self):
@@ -78,8 +78,10 @@ class ProjectUi(QtWidgets.QMainWindow):
         # logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
         # self.close()
         request="PBKEY:"+"BUNUIMZALA"
-        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
+        self.ui.listWidget.addItem("XXX"+response+"XXX")
+
 
 
     def disable_button(self):
@@ -92,7 +94,7 @@ class ProjectUi(QtWidgets.QMainWindow):
         name = self.ui.lineEdit_3.text()
 
         request="UINFO"
-        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
         self.ui.listWidget.addItem("XXX"+response+"XXX")
@@ -117,7 +119,7 @@ class ProjectUi(QtWidgets.QMainWindow):
     def share_twit_button(self):
         text = self.ui.plainTextEdit_4.toPlainText()
         request=text.strip()
-        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
         self.ui.listWidget.addItem("XXX"+response+"XXX")
@@ -172,7 +174,7 @@ def main():
     # ana soket oluşturuluyor ve hangi iplerden bağlantı kabul edileceği, port numarası bilgileri giriliyor..
     mySocket = socket.socket()  # Create a socket object
     host = "0.0.0.0"  # Accesible by all of the network
-    port = ar.SERVER_PORT
+    port = yay.SERVER_PORT
     mySocket.bind((host, port))  # Bind to the port
 
     mySocket.listen(5)  # Now wait for client connection,
@@ -181,10 +183,10 @@ def main():
     logQueue = queue.Queue()
     exitFlag = False
 
-    Logger = ar.loggerThread("Logger", "log.txt", logQueue, exitFlag)
+    Logger = yay.loggerThread("Logger", "log.txt", logQueue, exitFlag)
     Logger.start()
 
-    userInputThread = ar.UserInputThread("User Input Thread", logQueue)
+    userInputThread = yay.UserInputThread("User Input Thread", logQueue)
     userInputThread.start()
 
     arayUz = ArayuzThread("Arayüz Thread", logQueue)
@@ -200,7 +202,7 @@ def main():
             log = "Got connection from " + str(addr)
             logQueue.put(time.ctime() + "\t\t - " + log)
             print('Got connection from', addr)
-            serverThread = ar.ServerThread("Server Thread", c, ar.myUUID, ar.SERVER_HOST, ar.SERVER_PORT, ar.TYPE, logQueue, exitFlag)
+            serverThread = yay.ServerThread("Server Thread", c, yay.myUUID, yay.SERVER_HOST, yay.SERVER_PORT, yay.TYPE, logQueue, exitFlag)
             serverThread.start()
             threads.append(serverThread)
 
