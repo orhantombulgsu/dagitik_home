@@ -16,8 +16,8 @@ from Crypto.Hash import SHA256
 
 
 random_generator = Random.new().read
-f_priv = open('id_rsa','w+')
-f_pub = open('id_rsa.pub','w+')
+f_priv = open('id_rsa.txt','w+')
+f_pub = open('id_rsa.pub.txt','w+')
 
 if(f_priv and f_pub):
     private_key = f_priv.read()
@@ -43,8 +43,8 @@ STATUS = 0
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT  = 12351
-SERVER_PORT2 = 12352
+SERVER_PORT  = 12241
+SERVER_PORT2 = 12242
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -227,7 +227,8 @@ class ServerThread(threading.Thread):
                     # msgToSend = "MYPUB:" + str( (public_key.exportKey()).decode() ) + '$' + signature
                     pkstring = public_key.exportKey("PEM")
                     print(pkstring[1:])
-                    msgToSend = "MYPUB:" + pkstring.decode("utf-8") + '$' + signature
+                    print(signature[0])
+                    msgToSend = "MYPUB:".encode() + pkstring + '$'.encode() + bytes(signature[0])
                     myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), msgToSend, self.logQueue)
                     response = myClient.control()
                     if response[:5] == "PUBOK":

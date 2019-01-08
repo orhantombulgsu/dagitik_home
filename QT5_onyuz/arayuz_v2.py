@@ -41,7 +41,7 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def initializeIpPort(self):
         self.ui.lineEdit.setText("127.0.0.1")
-        self.ui.lineEdit_2.setText("12352")
+        self.ui.lineEdit_2.setText("12242")
         self.ui.lineEdit_3.setText("Mustafa")
 
     def connect(self):
