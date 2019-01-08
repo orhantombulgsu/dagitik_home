@@ -4,174 +4,15 @@ import socket
 import time
 import uuid
 import json
-import sys
+# import sys
 
-sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
-import QT5_onyuz.dagitik_proje_main
-
-from PyQt5 import QtWidgets, QtGui, QtCore
-from Aracı_Negotiator import Araci_with_2_threads, Araci_with_2_threads_Logger
-from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
-import threading
-my_blog_list = []
-
-
-
-
-
-
-
-class ProjectUi(QtWidgets.QMainWindow):
-    def __init__(self,logQueue):
-        self.logQueue=logQueue
-
-        self.qt_app = QtWidgets.QApplication(sys.argv)
-        QtWidgets.QWidget.__init__(self, None)
-
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self)
-        # list1 =[]
-        self.ui.pushButton.pressed.connect(self.connect)
-        self.ui.pushButton.pressed.connect(self.get_host_with_port)
-        self.ui.pushButton.pressed.connect(self.change_profile_name)
-        self.ui.pushButton.pressed.connect(self.disable_button)
-        self.ui.pushButton_2.pressed.connect(self.logout_button)
-        self.ui.pushButton_7.pressed.connect(self.subscribe_button)
-        self.ui.pushButton_3.pressed.connect(self.unsubscribe_button)
-        self.ui.pushButton_4.pressed.connect(self.unblock_button)
-        self.ui.pushButton_6.pressed.connect(self.block_button)
-        self.ui.pushButton_9.pressed.connect(self.send_message_button)
-        self.ui.pushButton_5.pressed.connect(self.share_twit_button)
-
-        #self.list =QtWidgets.QListWidget(self)
-
-    def connect(self):
-        self.get_host_with_port()
-        pass
-
-
-    def refresh_feed_button(self):
-        # takip edilen kişilerin serverlarına istek atarak twitleri yeniler
-        pass
-
-    def send_message_button(self):
-        # Send message to followed içine yazılan text yalnızca
-        # followers içinde check edilen kişilere gönderilecektir
-        pass
-
-    def block_button(self):
-        # Followers içindeki kullanıcılardan check edilenleri engelleyecektir.
-        pass
-
-    def unblock_button(self):
-        # Blocked içindeki kullanıcılardan check edilenlerin engellerini kaldıracaktır.
-        pass
-
-    def unsubscribe_button(self):
-        # Followed içindeki kullanıcılardan check edilenleri takipten çıkacaktır.
-        pass
-
-    def subscribe_button(self):
-        # Suggested users içindeki kullanıcılardan check edilenleri takip edecektir.
-        pass
-
-    def logout_button(self):
-        # logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
-        self.close()
-
-    def disable_button(self):
-        self.ui.pushButton.setDisabled(True)
-
-    def get_host_with_port(self):
-        # ip ve port alma işlemi
-        self.ip = self.ui.lineEdit.text()
-        self.port = self.ui.lineEdit_2.text()
-        name = self.ui.lineEdit_3.text()
-
-        request="UINFO"
-        myClient = ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
-        response = myClient.control()
-
-        self.ui.listWidget.addItem("XXX"+response+"XXX")
-
-        #self.ui.plainTextEdit_4.setPlainText(i)
-
-        # for i in range(10):
-        #    self.ui.listWidget.addItem('Item %s' %(i+1))
-
-        #item = QtGui.QListWidgetItem()
-        # item = QtWidgets.QListWidgetItem0
-        # item.setText(QtGui.QGuiApplication.translate("Dialog",'x',None,))
-        # item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable)
-        # item.setCheckState(QtCore.Qt.Unchecked)
-        # self.listWidget.addItem(item)
-
-    def change_profile_name(self):
-        # kullanıcı adını bağlandığında otomatik olarak değiştirme
-
-        # username =  name parametresi çekilecek
-        # username= self.ui.plainTextEdit.toPlainText()
-        # self.ui.label_2.setText(username)
-        pass
-
-    def share_twit_button(self):
-        text = self.ui.plainTextEdit_4.toPlainText()
-        request=text.strip()
-        myClient = ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
-        response = myClient.control()
-
-        self.ui.listWidget.addItem("XXX"+response+"XXX")
-
-        pass
-        '''
-        # share butonu ile my blog içerisine twit paylaşımı burası degisecek
-        text = self.ui.plainTextEdit_4.toPlainText()
-        if len(my_blog_list)==0:
-            notification = 'Henüz blog yazılmadı.'
-            my_blog_list.append(notification)
-            self.ui.listWidget_6.addItems(my_blog_list)
-        else:
-            my_blog_list.append(text)
-            self.ui.listWidget_6.addItems(my_blog_list)
-            # twit_list=[]
-            # twit1=self.ui.plainTextEdit_4.toPlainText()
-            # twit_list.append(twit1)
-            # self.ui.listWidget_6.addItems(twit_list) 
-        '''
-
-    def suggest_user(self, number_of_suggest, userlist):
-        # sayıya göre kullanıcı öneri listesini gösterme
-
-        # self.number_of_suggest = number_of_suggest
-        # self.userlist = userlist
-        # if userlist is None:
-        #    error_notification = 'Baglananan kullanıcı bulunmamaktadır.'
-        #    self.ui.listWidget_6.addItems(error_notification)
-        pass
-
-    def run(self):
-        self.show()
-        self.qt_app.exec_()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
+# import QT5_onyuz.dagitik_proje_main
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT = 12351
-SERVER_PORT2 = 12352
+SERVER_PORT  = 12342
+SERVER_PORT2 = 12341
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -186,8 +27,13 @@ clientQueue = queue.Queue()
 
 
 userInfoDict = dict()
-with open('data.json', 'r') as fp:
-    userInfoDict = json.load(fp)
+try:
+    with open('data.json', 'r') as fp:
+        userInfoDict = json.load(fp)
+except FileNotFoundError:
+    with open('data.json', 'w') as fp:
+        json.dump(userInfoDict, fp)
+
 myUUID = uuid.uuid4()
 print("my UUID = " + str(myUUID))
 
@@ -198,18 +44,6 @@ print("my UUID = " + str(myUUID))
 # userInfoDict[tmpUUID]=["oadress", "oPort", "oNanme", "oNEGOTIATOR"]
 # tmpUUID="a"
 # userInfoDict[tmpUUID]=["4", "4", "4", "4"]
-
-
-class ArayuzThread(threading.Thread):
-    def __init__(self, threadname, logQueue):
-        threading.Thread.__init__(self)
-        self.threadName = threadname
-        self.logQueue = logQueue
-
-    def run(self):
-        app = ProjectUi(self.logQueue)
-        app.run()
-
 
 # loglama işlemini yapacak thread tanımlanıyor.
 class loggerThread(threading.Thread):
@@ -254,11 +88,12 @@ class ServerThread(threading.Thread):
             msgReiceved = ((self.mySocket.recv(1024)).decode()).strip()
             if len(msgReiceved) > 1:
                 msgToSend = ""
-                print("ServerReaderThread " + msgReiceved + " ServerReaderThread")
+                print("ServerThread:AlinanMesaj=" + msgReiceved)
                 log = "Server thread received a message : " + msgReiceved
                 self.logQueue.put(time.ctime() + "\t\t - " + log)
                 msgToSend = str(self.readerParser(msgReiceved))
                 if len(msgToSend) >= 5:
+                    print("ServerThread:GönderilenMesaj=" + msgToSend)
                     self.mySocket.send((msgToSend).encode())
                     log = "Server thread sent a message : " + msgToSend
                     self.logQueue.put(time.ctime() + "\t\t - " + log)
@@ -267,15 +102,14 @@ class ServerThread(threading.Thread):
         prot = request[:5]
         response = ""
 
-        print("ReaderParser " + request + " ReaderParser")
         if prot == "HELLO":
             response = "HELLO"
 
         elif prot == "UINFO":  # YENI KULLANICI İSTEĞİ /KULLANICI BAĞLANTI KONTROLU
             paramIndex = request.find(":")
-            print("UINFODAYIM= " + str(paramIndex))
+            # print("UINFODAYIM= " + str(paramIndex))
             if (not paramIndex == -1):
-                print("paramiGectimBenreaderPArserim " + request + " ServerReaderThread")
+                # print("paramiGectimBenreaderPArserim " + request + " ServerReaderThread")
                 paramList = ((request[paramIndex + 1:]).strip()).split('$')
                 # print("paramList[0]= "+ str(paramList[0]))
                 if paramList[0] in userInfoDict.keys():
@@ -286,8 +120,8 @@ class ServerThread(threading.Thread):
                     # clientQueue.put("CHECK")
                     myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), "CHECK", self.logQueue)
                     response = myClient.control()
-                    print('RESPONSE:' + response)
-                    print('UUID:' + UUIDtoCheck)
+                    # print('RESPONSE:' + response)
+                    # print('UUID:' + UUIDtoCheck)
                     if str(response[6:]) == str(UUIDtoCheck):
                         msg = "CONOK"
                         userInfoDict[paramList[0]] = [paramList[1], paramList[2], paramList[3], paramList[4]]
@@ -296,11 +130,13 @@ class ServerThread(threading.Thread):
                     else:
                         msg = "CONER"
 
+                    print("ServerThread:GönderilenMesajj=" + msg)
                     self.mySocket.send(((msg).strip()).encode())
                     log = "Server thread : " + "UUIDs checked.   " + msg
                     self.logQueue.put(time.ctime() + "\t\t - " + log)
                     msgReiceved = ((self.mySocket.recv(1024)).decode()).strip()
                     if len(msgReiceved) > 1:
+                        print("ServerThread:AlinanMesaj=" + msgReiceved)
                         pass
 
 
@@ -379,18 +215,19 @@ class ClientThread(threading.Thread):
         log = self.threadName + " : " + "sending a message : " + textToSend
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         # print(s.recv(1024).decode())  # blocking'dir
+        print("ClientThread:GönderilenMesaj=" + textToSend)
         mySocket.send((textToSend.strip()).encode())
         response = ((mySocket.recv(1024)).decode()).strip()
+        print("ClientThread:AlinanMesaj=" + response)
         mySocket.close()  # Close the socket when done
         if (response[:5] == "LSUOK"):
             pass
 
         if len(response) > 1:
-            print("ClientThread " + response + " ClientThread")
+            # print("ClientThread " + response + " ClientThread")
             log = self.threadName + " : " + "response is " + response
             self.logQueue.put(time.ctime() + "\t\t - " + log)
             return response
-
         log = self.threadName + " : " + "response is " + ""
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         return ""
@@ -433,10 +270,6 @@ def main():
     userInputThread = UserInputThread("User Input Thread", logQueue)
     userInputThread.start()
 
-    arayUz = ArayuzThread("Arayüz Thread", logQueue)
-    arayUz.start()
-
-    # for i in range(2):
     while True:
         try:
             log = "Waiting for connection from any client via port number " + str(port)
@@ -449,18 +282,11 @@ def main():
             serverThread = ServerThread("Server Thread", c, myUUID, SERVER_HOST, SERVER_PORT, TYPE, logQueue, exitFlag)
             serverThread.start()
             threads.append(serverThread)
-
-
         except KeyboardInterrupt:
             break
 
-    #    clientThread = ClientThread("Client Thread")
-    #    clientThread.start()
-    #  threads.append(clientThread)
-
     for t in threads:
         t.join()
-
 
 if __name__ == '__main__':
     main()
