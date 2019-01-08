@@ -6,7 +6,7 @@ import uuid
 import json
 import sys
 
-sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
+sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
 import QT5_onyuz.dagitik_proje_main
 
 from PyQt5 import QtWidgets, QtGui, QtCore
@@ -14,10 +14,6 @@ from Aracı_Negotiator import Araci_with_2_threads, Araci_with_2_threads_Logger
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 import threading
 my_blog_list = []
-
-
-
-
 
 
 
@@ -154,20 +150,6 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.qt_app.exec_()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
 SERVER_PORT = 12351
@@ -222,16 +204,16 @@ class loggerThread(threading.Thread):
 
     def run(self):
         file = open(self.logFilePath, 'a')
-        file.write(str(time.ctime()) + " - " + self.threadName + " starting.\n")
+        file.write(str(time.ctime()) + "\t\t - " + self.threadName + " starting.\n")
         while not self.exitFlag:
             if not self.logQueue.empty():
                 log = self.logQueue.get()
                 if log == "QUITT":
                     self.exitFlag = True
-                    file.write(str(time.ctime()) + " - " + "Logger thread : OUITT received." + "\n")
+                    file.write(str(time.ctime()) + "\t\t - " + "Logger thread : OUITT received." + "\n")
                 else:
-                    file.write(str(time.ctime()) + " - " + str(log) + "\n")
-        file.write(str(time.ctime()) + " - " + self.name + "exiting." + "\n")
+                    file.write(str(time.ctime()) + "\t\t - " + str(log) + "\n")
+        file.write(str(time.ctime()) + "\t\t - " + self.name + "exiting." + "\n")
         file.close()
 
 
