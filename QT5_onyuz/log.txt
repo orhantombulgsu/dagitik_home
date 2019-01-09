@@ -86,3 +86,59 @@ Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Server thread sent a mes
 Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Client Thread : response is CONOK
 Wed Jan  9 14:31:41 2019 - Wed Jan  9 14:31:41 2019		 - Client Thread : is controlling.
 Wed Jan  9 14:31:41 2019 - Wed Jan  9 14:31:41 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 14:43:15 2019 - Logger starting.
+Wed Jan  9 14:43:15 2019 - Wed Jan  9 14:43:15 2019		 - User Input Thread : is starting.
+Wed Jan  9 14:43:15 2019 - Wed Jan  9 14:43:15 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Client Thread : is controlling.
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Client Thread : sending a message : UINFO:1b1b37a4-4c6d-482c-87cf-ac98a077dad6$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Got connection from ('127.0.0.1', 40704)
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Server thread starting.
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Server thread received a message : CHECK
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Server thread : MUUID:1b1b37a4-4c6d-482c-87cf-ac98a077dad6
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Server thread sent a message : MUUID:1b1b37a4-4c6d-482c-87cf-ac98a077dad6
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Client Thread : response is CONOK
+Wed Jan  9 14:43:33 2019 - Wed Jan  9 14:43:33 2019		 - Client Thread : is controlling.
+Wed Jan  9 14:43:33 2019 - Wed Jan  9 14:43:33 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 15:22:48 2019 - Logger starting.
+Wed Jan  9 15:22:48 2019 - Wed Jan  9 15:22:48 2019		 - User Input Thread : is starting.
+Wed Jan  9 15:22:48 2019 - Wed Jan  9 15:22:48 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Client Thread : sending a message : UINFO:f315a3e1-f352-4235-8d36-40150a005cf7$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Got connection from ('127.0.0.1', 41404)
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Server thread starting.
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Server thread received a message : CHECK
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Server thread : MUUID:f315a3e1-f352-4235-8d36-40150a005cf7
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Server thread sent a message : MUUID:f315a3e1-f352-4235-8d36-40150a005cf7
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Client Thread : response is CONOK
+Wed Jan  9 15:22:57 2019 - Wed Jan  9 15:22:57 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:22:57 2019 - Wed Jan  9 15:22:57 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 15:29:42 2019 - Logger starting.
+Wed Jan  9 15:29:42 2019 - Wed Jan  9 15:29:42 2019		 - User Input Thread : is starting.
+Wed Jan  9 15:29:42 2019 - Wed Jan  9 15:29:42 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Client Thread : sending a message : UINFO:9e0b6213-343f-43c8-92f7-03bf52d8179b$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Got connection from ('127.0.0.1', 41594)
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Server thread starting.
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Server thread received a message : CHECK
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Server thread : MUUID:9e0b6213-343f-43c8-92f7-03bf52d8179b
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Server thread sent a message : MUUID:9e0b6213-343f-43c8-92f7-03bf52d8179b
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Client Thread : response is CONOK
+Wed Jan  9 15:29:53 2019 - Wed Jan  9 15:29:53 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:29:53 2019 - Wed Jan  9 15:29:53 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 15:52:03 2019 - Logger starting.
+Wed Jan  9 15:52:03 2019 - Wed Jan  9 15:52:03 2019		 - User Input Thread : is starting.
+Wed Jan  9 15:52:03 2019 - Wed Jan  9 15:52:03 2019		 - Waiting for connection from any client via port number 12236
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Client Thread : sending a message : UINFO:703e07eb-d589-4f4e-84b5-07589a4cc719$127.0.0.1$12236$MUSTAFA$NEGOTIATOR
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Got connection from ('127.0.0.1', 47286)
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Server thread starting.
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Waiting for connection from any client via port number 12236
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Server thread received a message : CHECK
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Server thread : MUUID:703e07eb-d589-4f4e-84b5-07589a4cc719
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Server thread sent a message : MUUID:703e07eb-d589-4f4e-84b5-07589a4cc719
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Client Thread : response is CONOK
+Wed Jan  9 15:52:14 2019 - Wed Jan  9 15:52:14 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:52:14 2019 - Wed Jan  9 15:52:14 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
