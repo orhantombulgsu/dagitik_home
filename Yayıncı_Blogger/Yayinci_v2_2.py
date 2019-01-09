@@ -16,23 +16,24 @@ from Crypto.Hash import SHA256
 
 
 random_generator = Random.new().read
-f_priv = open('id_rsa.txt','w+')
-f_pub = open('id_rsa.pub.txt','w+')
+f_priv = open('id_rsa','w+')
+f_pub = open('id_rsa.pub','w+')
 
 if(f_priv and f_pub):
     private_key = f_priv.read()
     public_key = f_pub.read()
     if(private_key == ""):
-        new_key = RSA.generate(2048, randfunc=random_generator)
+        new_key = RSA.generate(1024, randfunc=random_generator)
         public_key = new_key.publickey()
-        f_pub.write(public_key.exportKey().decode())
-        # print(public_key.exportKey("PEM"))
+        f_pub.write(str(public_key.exportKey().decode()))
+        print(public_key.exportKey("PEM"))
         private_key = new_key
-        f_priv.write(private_key.exportKey().decode())
-        # print(new_key.exportKey("PEM"))
+        f_priv.write(str(private_key.exportKey().decode()))
+        #print(new_key.exportKey("PEM"))
 
 f_priv.close()
 f_pub.close()
+
 
 
 my_blog_list = []
@@ -43,8 +44,8 @@ STATUS = 0
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT  = 12242
-SERVER_PORT2 = 12241
+SERVER_PORT  = 12236
+SERVER_PORT2 = 12237
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -224,13 +225,15 @@ class ServerThread(threading.Thread):
                     msgToSign=paramList[0]
                     hash = SHA256.new(msgToSign.encode()).digest()
                     signature = private_key.sign(hash, '')
-                    # msgToSend = "MYPUB:" + str( (public_key.exportKey()).decode() ) + '$' + signature
+                    msgToSend = "MYPUB:" + str( (public_key.exportKey()).decode() ) + '$' + str(signature)
                     pkstring = public_key.exportKey("PEM")
-                    print(pkstring[1:])
-                    print(signature[0])
-                    msgToSend = "MYPUB:".encode() + pkstring + '$'.encode() + bytes(signature[0])
-                    myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), msgToSend, self.logQueue)
-                    response = myClient.control()
+                    print(pkstring)
+                    ####msgToSend = "MYPUB:".encode() + pkstring
+                    #msgToSend = "MYPUB:" + str(pkstring) + '$' + str(signature)
+                    #print("MYPUBBBB  "+msgToSend)
+                    #myClient = ClientThread("Client Thread", SERVER_HOST, int(SERVER_PORT), msgToSend, self.logQueue)
+                    #response = myClient.control()
+                    self.mySocket.send(msgToSend.encode())
                     if response[:5] == "PUBOK":
                         print("PUBOK GELDİİ")
                     elif response[:5] =="PUBER":
@@ -241,47 +244,49 @@ class ServerThread(threading.Thread):
                     response = "ERROR"
 
 
-        elif prot == "SIGNT":  # public_key kontrolu
-            if (STATUS == 0):
-                response = "CFAIL"
-            else:
-                text_sign = request[7:]
-                hash = SHA256.new(text_sign.encode()).digest()
-                signature = private_key.sign(hash, '')
-                response = "SIGND " + str(signature)
-
-        elif prot == "MYPUB":  # karisdan pk geldi ama string bunu rsa objesine cevirmeyi yapamadim.
-            pub = request[7:]
-            # pk = RSA.generate(2048, pub)
-            print("PKKKKKK" + pub)
-            response = "SIGNT " + "abc"
-
-        elif prot == "SIGND":  # bu mesaj geldiginde yukaridaki gelen public key ile acmak gerekiyor yapamadim.
-            print("SIGND geldiiiiiiiiiiiiiiiiiii\n")
-            if (STATUS == 0):
-                response = "CFAIL"
-            else:
-                text_sign = request[7:]
-                hash = SHA256.new(text_sign.encode()).digest()
-                if (public_key.verify(hash, request[7:]) == True):
-                    response = "PUBOK"
-                else:
-                    response = "PUBER"
-
-        elif prot == "PUBOK":
-            if (STATUS == 0):
-                response = "CFAIL"
-            else:
-                response = ""
-
-        elif prot == "PUBER":
-            if (STATUS == 0):
-                response = "CFAIL"
-            else:
-                response = ""
 
 
+        # elif prot == "SIGNT":  # public_key kontrolu
+        #     if (STATUS == 0):
+        #         response = "CFAIL"
+        #     else:
+        #         text_sign = request[7:]
+        #         hash = SHA256.new(text_sign.encode()).digest()
+        #         signature = private_key.sign(hash, '')
+        #         response = "SIGND " + str(signature)
 
+        # elif prot == "MYPUB":  # karisdan pk geldi ama string bunu rsa objesine cevirmeyi yapamadim.
+        #     pub = request[7:]
+        #     # pk = RSA.generate(2048, pub)
+        #     print("PKKKKKK" + pub)
+        #     response = "SIGNT " + "abc"
+        #
+        # elif prot == "SIGND":  # bu mesaj geldiginde yukaridaki gelen public key ile acmak gerekiyor yapamadim.
+        #     print("SIGND geldiiiiiiiiiiiiiiiiiii\n")
+        #     if (STATUS == 0):
+        #         response = "CFAIL"
+        #     else:
+        #         text_sign = request[7:]
+        #         hash = SHA256.new(text_sign.encode()).digest()
+        #         if (public_key.verify(hash, request[7:]) == True):
+        #             response = "PUBOK"
+        #         else:
+        #             response = "PUBER"
+        #
+        # elif prot == "PUBOK":
+        #     if (STATUS == 0):
+        #         response = "CFAIL"
+        #     else:
+        #         response = ""
+        #
+        # elif prot == "PUBER":
+        #     if (STATUS == 0):
+        #         response = "CFAIL"
+        #     else:
+        #         response = ""
+        #
+        #
+        #
 
         else:
             response = "ERROR"
@@ -323,11 +328,31 @@ class ClientThread(threading.Thread):
         log = self.threadName + " : " + "sending a message : " + textToSend
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         # print(s.recv(1024).decode())  # blocking'dir
-        print("ClientThread:GönderilenMesaj=" + textToSend)
+        #print("ClientThread:GönderilenMesaj=" + textToSend)
         mySocket.send((textToSend.strip()).encode())
         response = ((mySocket.recv(1024)).decode()).strip()
-        print("ClientThread:AlinanMesaj=" + response)
+        print(type(response))
+        #print("ClientThread:AlinanMesaj=" + response)
         mySocket.close()  # Close the socket when done
+
+
+        # pro = response[0:6].decode()
+        # print("Prooooo " +str(pro))
+        # pk = response[6:].decode()
+        # print("pkk " +pk)
+        # print(type(pk))
+        if(response[:5] == "MYPUB"):
+            pub_sifrelimesaj=response[6:].split("$")
+            print(type(pub_sifrelimesaj[0][1:]))
+            print("PKKK = " + pub_sifrelimesaj[0][1:])
+            #x=pub_sifrelimesaj[0][1:].replace("-----BEGIN PUBLIC KEY-----","-----BEGIN RSA PUBLIC KEY-----")
+            #x=pub_sifrelimesaj[0][1:].replace("-----END PUBLIC KEY-----","-----END RSA PUBLIC KEY-----")
+            print("sifreli mesaj = " + pub_sifrelimesaj[1])
+            key = RSA.importKey(pub_sifrelimesaj[0][1:].encode(encoding='UTF-8'))
+            pubkey = key.publickey()
+            print("PUBLIIICCC "+key)
+
+
         if (response[:5] == "LSUOK"):
             pass
 
@@ -339,6 +364,31 @@ class ClientThread(threading.Thread):
         log = self.threadName + " : " + "response is " + ""
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         return ""
+
+    # def publicKey_control(self):
+    #     log = self.threadName + " : " + "Public Key is controlling."
+    #     self.logQueue.put(time.ctime() + "\t\t - " + log)
+    #     mySocket = socket.socket()  # Create a socket object
+    #     host = self.hostToConnect  # Connection point (localhost)
+    #     port = self.portToConnect  # Reserve a port for your service.
+    #
+    #     mySocket.connect((host, int(port)))
+    #
+    #     prot = self.cmnd[:5]
+    #
+    #
+    #     response = ((mySocket.recv(1024)).decode()).strip()
+    #     mySocket.close()  # Close the socket when done
+    #
+    #         if(signd == self.cmnd[7:]):
+    #             response = "PUBOK"
+    #         else:
+    #             response = "PUBER"
+    #
+    #         return response
+    #     log = self.threadName + " : " + "response is " + ""
+    #     self.logQueue.put(time.ctime() + "\t\t - " + log)
+    #     return ""
 
 
 class UserInputThread(threading.Thread):
@@ -354,7 +404,7 @@ class UserInputThread(threading.Thread):
             request = input("Enter your request > ")
             log = self.threadName + " : " + "Input request is " + request
             self.logQueue.put(time.ctime() + "\t\t - " + log)
-            myClient = ClientThread("Client Thread", SERVER_HOST, SERVER_PORT2, request, self.logQueue)
+            myClient = ClientThread("Client Thread", SERVER_HOST, SERVER_PORT, request, self.logQueue)
             response = myClient.control()
 
 

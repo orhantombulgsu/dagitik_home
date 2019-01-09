@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
+sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 from Yayıncı_Blogger import Yayinci_v2 as yay
