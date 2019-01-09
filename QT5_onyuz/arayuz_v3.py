@@ -1,19 +1,22 @@
-from PyQt5 import QtWidgets, QtGui, QtCore
-from Aracı_Negotiator import Araci_v5 as ar
-from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
+import sys
+sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
 
+from PyQt5 import QtWidgets, QtGui, QtCore
+from Yayıncı_Blogger import Yayinci_v3 as yay
+from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 my_blog_list = []
 
 import threading
 import queue
 import socket
 import time
-import sys
+
+
 
 
 class ProjectUi(QtWidgets.QMainWindow):
-    def __init__(self, logQueue):
-        self.logQueue = logQueue
+    def __init__(self,logQueue):
+        self.logQueue=logQueue
 
         self.qt_app = QtWidgets.QApplication(sys.argv)
         QtWidgets.QWidget.__init__(self, None)
@@ -21,29 +24,30 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         # list1 =[]
-        self.ui.connect_button.pressed.connect(self.connect)
-        # self.ui.connect_button.pressed.connect(self.get_host_with_port)
-        self.ui.connect_button.pressed.connect(self.change_profile_name)
-        # self.ui.connect_button.pressed.connect(self.disable_button)
-        self.ui.LogOut_button.pressed.connect(self.logout_button)
-        self.ui.Subscribe_button.pressed.connect(self.subscribe_button)
-        self.ui.UnSubscribe_button.pressed.connect(self.unsubscribe_button)
-        self.ui.UnBlock_button.pressed.connect(self.unblock_button)
-        self.ui.Block_button.pressed.connect(self.block_button)
-        self.ui.SendMessage_button.pressed.connect(self.send_message_button)
-        self.ui.Share_button.pressed.connect(self.share_twit_button)
+        self.ui.pushButton.pressed.connect(self.connect)
+        # self.ui.pushButton.pressed.connect(self.get_host_with_port)
+        self.ui.pushButton.pressed.connect(self.change_profile_name)
+        # self.ui.pushButton.pressed.connect(self.disable_button)
+        self.ui.pushButton_2.pressed.connect(self.logout_button)
+        self.ui.pushButton_7.pressed.connect(self.subscribe_button)
+        self.ui.pushButton_3.pressed.connect(self.unsubscribe_button)
+        self.ui.pushButton_4.pressed.connect(self.unblock_button)
+        self.ui.pushButton_6.pressed.connect(self.block_button)
+        self.ui.pushButton_9.pressed.connect(self.send_message_button)
+        self.ui.pushButton_5.pressed.connect(self.share_twit_button)
         self.initializeIpPort()
 
-        # self.list =QtWidgets.QListWidget(self)
+        #self.list =QtWidgets.QListWidget(self)
 
     def initializeIpPort(self):
-        self.ui.ip_field.setText("127.0.0.1")
-        self.ui.port_field.setText("12342")
-        self.ui.username_field.setText("Mustafa")
+        self.ui.lineEdit.setText("127.0.0.1")
+        self.ui.lineEdit_2.setText("12242")
+        self.ui.lineEdit_3.setText("Mustafa")
 
     def connect(self):
         self.get_host_with_port()
         pass
+
 
     def refresh_feed_button(self):
         # takip edilen kişilerin serverlarına istek atarak twitleri yeniler
@@ -72,29 +76,35 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def logout_button(self):
         # logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
-        self.close()
+        # self.close()
+        request="PBKEY:"+"BUNUIMZALA"
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        response = myClient.control()
+        self.ui.listWidget.addItem("XXX"+response+"XXX")
+
+
 
     def disable_button(self):
-        self.ui.connect_button.setDisabled(True)
+        self.ui.pushButton.setDisabled(True)
 
     def get_host_with_port(self):
         # ip ve port alma işlemi
-        self.ip = self.ui.ip_field.text()
-        self.port = self.ui.port_field.text()
-        name = self.ui.username_field.text()
+        self.ip = self.ui.lineEdit.text()
+        self.port = self.ui.lineEdit_2.text()
+        name = self.ui.lineEdit_3.text()
 
-        request = "UINFO"
-        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        request="UINFO"
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
-        self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
+        self.ui.listWidget.addItem("XXX"+response+"XXX")
 
-        # self.ui.plainTextEdit_4.setPlainText(i)
+        #self.ui.plainTextEdit_4.setPlainText(i)
 
         # for i in range(10):
         #    self.ui.listWidget.addItem('Item %s' %(i+1))
 
-        # item = QtGui.QListWidgetItem()
+        #item = QtGui.QListWidgetItem()
         # item = QtWidgets.QListWidgetItem0
         # item.setText(QtGui.QGuiApplication.translate("Dialog",'x',None,))
         # item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable)
@@ -103,16 +113,16 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def change_profile_name(self):
         # kullanıcı adını bağlandığında otomatik olarak değiştirme
-        username = self.ui.username_field.text()
-        self.ui.UserNameLabel_field.setText(username)
+        username = self.ui.lineEdit_3.text()
+        self.ui.label_2.setText(username)
 
     def share_twit_button(self):
-        text = self.ui.Twit_field.toPlainText()
-        request = text.strip()
-        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        text = self.ui.plainTextEdit_4.toPlainText()
+        request=text.strip()
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
-        self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
+        self.ui.listWidget.addItem("XXX"+response+"XXX")
 
         pass
         '''
@@ -157,12 +167,14 @@ class ArayuzThread(threading.Thread):
         app.run()
 
 
+
+
 def main():
     threads = []
     # ana soket oluşturuluyor ve hangi iplerden bağlantı kabul edileceği, port numarası bilgileri giriliyor..
     mySocket = socket.socket()  # Create a socket object
     host = "0.0.0.0"  # Accesible by all of the network
-    port = ar.SERVER_PORT
+    port = yay.SERVER_PORT
     mySocket.bind((host, port))  # Bind to the port
 
     mySocket.listen(5)  # Now wait for client connection,
@@ -171,10 +183,10 @@ def main():
     logQueue = queue.Queue()
     exitFlag = False
 
-    Logger = ar.loggerThread("Logger", "log.txt", logQueue, exitFlag)
+    Logger = yay.loggerThread("Logger", "log.txt", logQueue, exitFlag)
     Logger.start()
 
-    userInputThread = ar.UserInputThread("User Input Thread", logQueue)
+    userInputThread = yay.UserInputThread("User Input Thread", logQueue)
     userInputThread.start()
 
     arayUz = ArayuzThread("Arayüz Thread", logQueue)
@@ -190,8 +202,7 @@ def main():
             log = "Got connection from " + str(addr)
             logQueue.put(time.ctime() + "\t\t - " + log)
             print('Got connection from', addr)
-            serverThread = ar.ServerThread("Server Thread", c, ar.myUUID, ar.SERVER_HOST, ar.SERVER_PORT, ar.TYPE,
-                                           logQueue, exitFlag)
+            serverThread = yay.ServerThread("Server Thread", c, yay.myUUID, yay.SERVER_HOST, yay.SERVER_PORT, yay.TYPE, logQueue, exitFlag)
             serverThread.start()
             threads.append(serverThread)
 

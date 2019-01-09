@@ -1,0 +1,144 @@
+Tue Jan  8 23:51:35 2019 - Logger starting.
+Tue Jan  8 23:51:35 2019 - Tue Jan  8 23:51:35 2019		 - User Input Thread : is starting.
+Tue Jan  8 23:51:35 2019 - Tue Jan  8 23:51:35 2019		 - Waiting for connection from any client via port number 12231
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Client Thread : is controlling.
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Client Thread : sending a message : UINFO:0b523a9b-5d0e-4404-ab80-5bc4e95155a3$127.0.0.1$12231$MUSTAFA$NEGOTIATOR
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Got connection from ('127.0.0.1', 39420)
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Server thread starting.
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Waiting for connection from any client via port number 12231
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Server thread received a message : CHECK
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Server thread : MUUID:0b523a9b-5d0e-4404-ab80-5bc4e95155a3
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Server thread sent a message : MUUID:0b523a9b-5d0e-4404-ab80-5bc4e95155a3
+Tue Jan  8 23:51:46 2019 - Tue Jan  8 23:51:46 2019		 - Client Thread : response is CONOK
+Tue Jan  8 23:51:48 2019 - Tue Jan  8 23:51:48 2019		 - Client Thread : is controlling.
+Tue Jan  8 23:51:48 2019 - Tue Jan  8 23:51:48 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Tue Jan  8 23:51:48 2019 - Tue Jan  8 23:51:48 2019		 - Got connection from ('127.0.0.1', 39424)
+Tue Jan  8 23:51:48 2019 - Tue Jan  8 23:51:48 2019		 - Server thread starting.
+Tue Jan  8 23:51:48 2019 - Tue Jan  8 23:51:48 2019		 - Waiting for connection from any client via port number 12231
+Tue Jan  8 23:51:48 2019 - Tue Jan  8 23:51:48 2019		 - Server thread received a message : MYPUB:<_RSAobj @0x7f586f44b0b8 n(2048),e>$(4694514109043271746053347355654278382756899340649926180457680110156616376948354972309929053080818916056259612809355371267919880700081966683322234408861991924647135722949607852749753105481323835081764306048018876786684355318055110212094394447547382212098862714676791062840252713049341428910580038417069595955671999256800467898841436255633549595726023706178272096104219370571685023920924393401389333085038232130144332814155406493246204264243599343554647780189613681897588691288205124888985620843326768891479458490900754395043042873225654179639670267050126400743140817495904376474361711152057608139755882043106804632387,)
+Tue Jan  8 23:51:48 2019 - Tue Jan  8 23:51:48 2019		 - Server thread : SIGNT abc
+Tue Jan  8 23:51:48 2019 - Tue Jan  8 23:51:48 2019		 - Server thread sent a message : SIGNT abc
+Wed Jan  9 00:26:18 2019 - Logger starting.
+Wed Jan  9 00:26:18 2019 - Wed Jan  9 00:26:18 2019		 - User Input Thread : is starting.
+Wed Jan  9 00:26:18 2019 - Wed Jan  9 00:26:18 2019		 - Waiting for connection from any client via port number 12231
+Wed Jan  9 00:26:29 2019 - Wed Jan  9 00:26:29 2019		 - Client Thread : is controlling.
+Wed Jan  9 00:26:29 2019 - Wed Jan  9 00:26:29 2019		 - Client Thread : sending a message : UINFO:8ae11f2d-a4e9-4157-840c-212392f9e4ea$127.0.0.1$12231$MUSTAFA$NEGOTIATOR
+Wed Jan  9 00:26:29 2019 - Wed Jan  9 00:26:29 2019		 - Got connection from ('127.0.0.1', 39544)
+Wed Jan  9 00:26:29 2019 - Wed Jan  9 00:26:29 2019		 - Server thread starting.
+Wed Jan  9 00:26:29 2019 - Wed Jan  9 00:26:29 2019		 - Waiting for connection from any client via port number 12231
+Wed Jan  9 00:26:29 2019 - Wed Jan  9 00:26:29 2019		 - Server thread received a message : CHECK
+Wed Jan  9 00:26:29 2019 - Wed Jan  9 00:26:29 2019		 - Server thread : MUUID:8ae11f2d-a4e9-4157-840c-212392f9e4ea
+Wed Jan  9 00:26:29 2019 - Wed Jan  9 00:26:29 2019		 - Server thread sent a message : MUUID:8ae11f2d-a4e9-4157-840c-212392f9e4ea
+Wed Jan  9 00:43:02 2019 - Logger starting.
+Wed Jan  9 00:43:02 2019 - Wed Jan  9 00:43:02 2019		 - User Input Thread : is starting.
+Wed Jan  9 00:43:02 2019 - Wed Jan  9 00:43:02 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Client Thread : is controlling.
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Client Thread : sending a message : UINFO:cd6f7643-94c2-44ba-b073-d5a88b9fb8b9$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Got connection from ('127.0.0.1', 58414)
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Server thread starting.
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Server thread received a message : CHECK
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Server thread : MUUID:cd6f7643-94c2-44ba-b073-d5a88b9fb8b9
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Server thread sent a message : MUUID:cd6f7643-94c2-44ba-b073-d5a88b9fb8b9
+Wed Jan  9 00:43:17 2019 - Wed Jan  9 00:43:17 2019		 - Client Thread : response is CONOK
+Wed Jan  9 00:43:18 2019 - Wed Jan  9 00:43:18 2019		 - Client Thread : is controlling.
+Wed Jan  9 00:43:18 2019 - Wed Jan  9 00:43:18 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 01:17:47 2019 - Logger starting.
+Wed Jan  9 01:17:47 2019 - Wed Jan  9 01:17:47 2019		 - User Input Thread : is starting.
+Wed Jan  9 01:17:47 2019 - Wed Jan  9 01:17:47 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Client Thread : is controlling.
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Client Thread : sending a message : UINFO:47d8d22b-bd05-4794-9755-98fbb2b69500$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Got connection from ('127.0.0.1', 59024)
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Server thread starting.
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Server thread received a message : CHECK
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Server thread : MUUID:47d8d22b-bd05-4794-9755-98fbb2b69500
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Server thread sent a message : MUUID:47d8d22b-bd05-4794-9755-98fbb2b69500
+Wed Jan  9 01:17:58 2019 - Wed Jan  9 01:17:58 2019		 - Client Thread : response is CONOK
+Wed Jan  9 01:17:59 2019 - Wed Jan  9 01:17:59 2019		 - Client Thread : is controlling.
+Wed Jan  9 01:17:59 2019 - Wed Jan  9 01:17:59 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 13:44:52 2019 - Logger starting.
+Wed Jan  9 13:44:52 2019 - Wed Jan  9 13:44:52 2019		 - User Input Thread : is starting.
+Wed Jan  9 13:44:52 2019 - Wed Jan  9 13:44:52 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 13:45:03 2019 - Wed Jan  9 13:45:03 2019		 - Client Thread : is controlling.
+Wed Jan  9 13:45:03 2019 - Wed Jan  9 13:45:03 2019		 - Client Thread : sending a message : UINFO:60f158d2-34b8-40e9-8402-88a5b4b367bf$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 13:45:03 2019 - Wed Jan  9 13:45:03 2019		 - Got connection from ('127.0.0.1', 40464)
+Wed Jan  9 13:45:03 2019 - Wed Jan  9 13:45:03 2019		 - Server thread starting.
+Wed Jan  9 13:45:03 2019 - Wed Jan  9 13:45:03 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 13:45:03 2019 - Wed Jan  9 13:45:03 2019		 - Server thread received a message : CHECK
+Wed Jan  9 13:45:03 2019 - Wed Jan  9 13:45:03 2019		 - Server thread : MUUID:60f158d2-34b8-40e9-8402-88a5b4b367bf
+Wed Jan  9 13:45:04 2019 - Wed Jan  9 13:45:04 2019		 - Server thread sent a message : MUUID:60f158d2-34b8-40e9-8402-88a5b4b367bf
+Wed Jan  9 13:45:04 2019 - Wed Jan  9 13:45:04 2019		 - Client Thread : response is CONOK
+Wed Jan  9 13:45:04 2019 - Wed Jan  9 13:45:04 2019		 - Client Thread : is controlling.
+Wed Jan  9 13:45:04 2019 - Wed Jan  9 13:45:04 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 13:45:05 2019 - Wed Jan  9 13:45:05 2019		 - Client Thread : response is MYPUB:b'-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDVX2IeeXHK8usmo/cO/HFZsWl8\nz/JJqG+IcY98fcWyecw/39meT9/9J5BFSCz5yquhYUryDKPC52MS6BilqgSVXdap\nRv0+ETOaxR7SJVXmSCXQeMhxL4jNwEoC8nZikkH6f/5fdmWKoji28LmlYb2qutI1\n59f8Xcjaeuq1IlA+ZwIDAQAB\n-----END PUBLIC KEY-----'$(40039786717791347842392584631984473734777180882931253370791006777742326371335106792945124669491353839827576842837684842062242243186348286510267814468294680077639454806107050833710383736808643892875649182405879590200295588024321499083446238422072247712399979064680674195616097460884695907693605212302975588275,)
+Wed Jan  9 14:31:34 2019 - Logger starting.
+Wed Jan  9 14:31:34 2019 - Wed Jan  9 14:31:34 2019		 - User Input Thread : is starting.
+Wed Jan  9 14:31:34 2019 - Wed Jan  9 14:31:34 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Client Thread : is controlling.
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Client Thread : sending a message : UINFO:98bf6038-d549-49af-88df-01b57e264853$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Got connection from ('127.0.0.1', 40596)
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Server thread starting.
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Server thread received a message : CHECK
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Server thread : MUUID:98bf6038-d549-49af-88df-01b57e264853
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Server thread sent a message : MUUID:98bf6038-d549-49af-88df-01b57e264853
+Wed Jan  9 14:31:40 2019 - Wed Jan  9 14:31:40 2019		 - Client Thread : response is CONOK
+Wed Jan  9 14:31:41 2019 - Wed Jan  9 14:31:41 2019		 - Client Thread : is controlling.
+Wed Jan  9 14:31:41 2019 - Wed Jan  9 14:31:41 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 14:43:15 2019 - Logger starting.
+Wed Jan  9 14:43:15 2019 - Wed Jan  9 14:43:15 2019		 - User Input Thread : is starting.
+Wed Jan  9 14:43:15 2019 - Wed Jan  9 14:43:15 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Client Thread : is controlling.
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Client Thread : sending a message : UINFO:1b1b37a4-4c6d-482c-87cf-ac98a077dad6$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Got connection from ('127.0.0.1', 40704)
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Server thread starting.
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Server thread received a message : CHECK
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Server thread : MUUID:1b1b37a4-4c6d-482c-87cf-ac98a077dad6
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Server thread sent a message : MUUID:1b1b37a4-4c6d-482c-87cf-ac98a077dad6
+Wed Jan  9 14:43:29 2019 - Wed Jan  9 14:43:29 2019		 - Client Thread : response is CONOK
+Wed Jan  9 14:43:33 2019 - Wed Jan  9 14:43:33 2019		 - Client Thread : is controlling.
+Wed Jan  9 14:43:33 2019 - Wed Jan  9 14:43:33 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 15:22:48 2019 - Logger starting.
+Wed Jan  9 15:22:48 2019 - Wed Jan  9 15:22:48 2019		 - User Input Thread : is starting.
+Wed Jan  9 15:22:48 2019 - Wed Jan  9 15:22:48 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Client Thread : sending a message : UINFO:f315a3e1-f352-4235-8d36-40150a005cf7$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Got connection from ('127.0.0.1', 41404)
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Server thread starting.
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Server thread received a message : CHECK
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Server thread : MUUID:f315a3e1-f352-4235-8d36-40150a005cf7
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Server thread sent a message : MUUID:f315a3e1-f352-4235-8d36-40150a005cf7
+Wed Jan  9 15:22:56 2019 - Wed Jan  9 15:22:56 2019		 - Client Thread : response is CONOK
+Wed Jan  9 15:22:57 2019 - Wed Jan  9 15:22:57 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:22:57 2019 - Wed Jan  9 15:22:57 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 15:29:42 2019 - Logger starting.
+Wed Jan  9 15:29:42 2019 - Wed Jan  9 15:29:42 2019		 - User Input Thread : is starting.
+Wed Jan  9 15:29:42 2019 - Wed Jan  9 15:29:42 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Client Thread : sending a message : UINFO:9e0b6213-343f-43c8-92f7-03bf52d8179b$127.0.0.1$12237$MUSTAFA$NEGOTIATOR
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Got connection from ('127.0.0.1', 41594)
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Server thread starting.
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Waiting for connection from any client via port number 12237
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Server thread received a message : CHECK
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Server thread : MUUID:9e0b6213-343f-43c8-92f7-03bf52d8179b
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Server thread sent a message : MUUID:9e0b6213-343f-43c8-92f7-03bf52d8179b
+Wed Jan  9 15:29:52 2019 - Wed Jan  9 15:29:52 2019		 - Client Thread : response is CONOK
+Wed Jan  9 15:29:53 2019 - Wed Jan  9 15:29:53 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:29:53 2019 - Wed Jan  9 15:29:53 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA
+Wed Jan  9 15:52:03 2019 - Logger starting.
+Wed Jan  9 15:52:03 2019 - Wed Jan  9 15:52:03 2019		 - User Input Thread : is starting.
+Wed Jan  9 15:52:03 2019 - Wed Jan  9 15:52:03 2019		 - Waiting for connection from any client via port number 12236
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Client Thread : sending a message : UINFO:703e07eb-d589-4f4e-84b5-07589a4cc719$127.0.0.1$12236$MUSTAFA$NEGOTIATOR
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Got connection from ('127.0.0.1', 47286)
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Server thread starting.
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Waiting for connection from any client via port number 12236
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Server thread received a message : CHECK
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Server thread : MUUID:703e07eb-d589-4f4e-84b5-07589a4cc719
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Server thread sent a message : MUUID:703e07eb-d589-4f4e-84b5-07589a4cc719
+Wed Jan  9 15:52:12 2019 - Wed Jan  9 15:52:12 2019		 - Client Thread : response is CONOK
+Wed Jan  9 15:52:14 2019 - Wed Jan  9 15:52:14 2019		 - Client Thread : is controlling.
+Wed Jan  9 15:52:14 2019 - Wed Jan  9 15:52:14 2019		 - Client Thread : sending a message : PBKEY:BUNUIMZALA

@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
+sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 from Yayıncı_Blogger import Yayinci_v2 as yay
@@ -41,7 +41,7 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def initializeIpPort(self):
         self.ui.lineEdit.setText("127.0.0.1")
-        self.ui.lineEdit_2.setText("12352")
+        self.ui.lineEdit_2.setText("12242")
         self.ui.lineEdit_3.setText("Mustafa")
 
     def connect(self):
