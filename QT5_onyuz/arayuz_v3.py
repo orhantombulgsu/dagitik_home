@@ -35,6 +35,7 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.ui.Block_button.pressed.connect(self.block_button)
         self.ui.SendMessage_button.pressed.connect(self.send_message_button)
         self.ui.Share_button.pressed.connect(self.share_twit_button)
+        self.ui.Pubkey_button.pressed.connect(self.pubkey_button)
         self.initializeIpPort()
 
         #self.list =QtWidgets.QListWidget(self)
@@ -48,6 +49,9 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.get_host_with_port()
         pass
 
+    def pubkey_button(self):
+        # pubkey buttonuna basıldığında gerçekleştirilecek eylem
+        pass
 
     def refresh_feed_button(self):
         # takip edilen kişilerin serverlarına istek atarak twitleri yeniler
