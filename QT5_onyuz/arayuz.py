@@ -72,7 +72,11 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def logout_button(self):
         # logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
-        self.close()
+        # self.close()
+        request="PBKEY:"+"BUNUIMZALA"
+        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        response = myClient.control()
+        self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
 
     def disable_button(self):
         self.ui.connect_button.setDisabled(True)
@@ -114,7 +118,7 @@ class ProjectUi(QtWidgets.QMainWindow):
 
         self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
 
-        pass
+
         '''
         # share butonu ile my blog içerisine twit paylaşımı burası degisecek
         text = self.ui.plainTextEdit_4.toPlainText()
