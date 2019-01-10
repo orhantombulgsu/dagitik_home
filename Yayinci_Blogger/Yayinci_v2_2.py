@@ -44,8 +44,8 @@ STATUS = 0
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT  = 12237
-SERVER_PORT2 = 12236
+SERVER_PORT  = 12396
+SERVER_PORT2 = 12395
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 SERVER_HOST = "127.0.0.1"
 TYPE = "NEGOTIATOR"
@@ -347,7 +347,7 @@ class ClientThread(threading.Thread):
             print("PKKK = " + pub_sifrelimesaj[0])
             print("sifreli mesaj = " + pub_sifrelimesaj[1])
             key = RSA.importKey((pub_sifrelimesaj[0]).encode())
-            hash= SHA256.new("BUNUIMZAL".encode()).digest()
+            hash= SHA256.new("BUNUIMZALA".encode()).digest()
             print(hash)
             print((pub_sifrelimesaj[1]).encode())
             signature = int(pub_sifrelimesaj[1][1:-1].split(",")[0])

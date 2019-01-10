@@ -202,3 +202,6 @@ Wed Jan  9 15:55:47 2019 - Wed Jan  9 15:55:47 2019		 - Server thread starting.
 Wed Jan  9 15:55:47 2019 - Wed Jan  9 15:55:47 2019		 - Waiting for connection from any client via port number 12237
 Wed Jan  9 15:55:47 2019 - Wed Jan  9 15:55:47 2019		 - Server thread received a message : PBKEY:BUNUIMZALA
 Wed Jan  9 15:55:47 2019 - Wed Jan  9 15:55:47 2019		 - Server thread : 
+Thu Jan 10 11:21:40 2019 - Logger starting.
+Thu Jan 10 11:21:40 2019 - Thu Jan 10 11:21:40 2019		 - User Input Thread : is starting.
+Thu Jan 10 11:21:40 2019 - Thu Jan 10 11:21:40 2019		 - Waiting for connection from any client via port number 12237

@@ -2,7 +2,7 @@ import sys
 sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
 
 from PyQt5 import QtWidgets, QtGui, QtCore
-from Yayinci_Blogger import Yayinci_v2_2 as yay
+from Yayinci_Blogger import Yayinci_v2 as yay
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 my_blog_list = []
 
@@ -42,7 +42,7 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def initializeIpPort(self):
         self.ui.ip_field.setText("127.0.0.1")
-        self.ui.port_field.setText("12342")
+        self.ui.port_field.setText("12396")
         self.ui.username_field.setText("Mustafa")
 
     def connect(self):
@@ -51,6 +51,10 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def pubkey_button(self):
         # pubkey buttonuna basıldığında gerçekleştirilecek eylem
+        request="PBKEY:"+"BUNUIMZALA"
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        response = myClient.control()
+        self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
         pass
 
     def refresh_feed_button(self):
@@ -80,11 +84,7 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def logout_button(self):
         # logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
-        # self.close()
-        request="PBKEY:"+"BUNUIMZALA"
-        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
-        response = myClient.control()
-        self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
+        self.close()
 
 
 
@@ -123,7 +123,7 @@ class ProjectUi(QtWidgets.QMainWindow):
     def share_twit_button(self):
         text = self.ui.Twit_field.toPlainText()
         request = text.strip()
-        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
         self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
