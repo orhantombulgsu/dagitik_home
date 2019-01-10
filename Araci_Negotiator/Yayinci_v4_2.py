@@ -20,15 +20,15 @@ f_priv = open('id_rsa','w+')
 f_pub = open('id_rsa.pub','w+')
 
 if(f_priv and f_pub):
-    private_key = f_priv.read()
-    public_key = f_pub.read()
-    if(private_key == ""):
+    my_private_key = f_priv.read()
+    my_public_key = f_pub.read()
+    if(my_private_key == ""):
         new_key = RSA.generate(1024, randfunc=random_generator)
-        public_key = new_key.publickey()
-        f_pub.write(str(public_key.exportKey().decode()))
-        print(public_key.exportKey())
-        private_key = new_key
-        f_priv.write(str(private_key.exportKey().decode()))
+        my_public_key = new_key.publickey()
+        f_pub.write(str(my_public_key.exportKey().decode()))
+        print(my_public_key.exportKey())
+        my_private_key = new_key
+        f_priv.write(str(my_private_key.exportKey().decode()))
         #print(new_key.exportKey())
 
 f_priv.close()
@@ -64,20 +64,18 @@ except FileNotFoundError:
     with open('data.json', 'w') as fp:
         json.dump(userInfoDict, fp)
 
-myUUID = "AraciUUID"
-# myUUID = uuid.uuid4()
-
+myUUID = uuid.uuid4()
 print("my UUID = " + str(myUUID))
 
 
-tmpUUID="yasemin"
-userInfoDict[tmpUUID]=["yadress", "yPort", "yNanme", "yNEGOTIATOR",None]
-tmpUUID="orhan"
-userInfoDict[tmpUUID]=["oadress", "oPort", "oNanme", "oNEGOTIATOR",None]
-tmpUUID="a"
-userInfoDict[tmpUUID]=["4", "4", "4", "4",None]
-with open('data.json', 'w') as fp:
-    json.dump(userInfoDict, fp)
+# tmpUUID="yasemin"
+# userInfoDict[tmpUUID]=["yadress", "yPort", "yNanme", "yNEGOTIATOR",None]
+# tmpUUID="orhan"
+# userInfoDict[tmpUUID]=["oadress", "oPort", "oNanme", "oNEGOTIATOR",None]
+# tmpUUID="a"
+# userInfoDict[tmpUUID]=["4", "4", "4", "4",None]
+# with open('data.json', 'w') as fp:
+#     json.dump(userInfoDict, fp)
 
 
 # loglama işlemini yapacak thread tanımlanıyor.
@@ -137,6 +135,7 @@ class ServerThread(threading.Thread):
         prot = request[:5]
         response = ""
         global STATUS
+        global userInfoDict
 
         if prot == "HELLO":
             response = "HELLO"
@@ -148,8 +147,8 @@ class ServerThread(threading.Thread):
                 # print("paramiGectimBenreaderPArserim " + request + " ServerReaderThread")
                 paramList = ((request[paramIndex + 1:]).strip()).split('$')
                 # print("paramList[0]= "+ str(paramList[0]))
-                with open('data.json', 'r') as fp:
-                    userInfoDict = json.load(fp)
+                #with open('data.json', 'r') as fp:
+                 #   userInfoDict = json.load(fp)
 
                 if paramList[0] in userInfoDict.keys():
                     response = "CHKED"
@@ -164,8 +163,8 @@ class ServerThread(threading.Thread):
                     if str(response[6:]) == str(UUIDtoCheck):
                         msg = "CONOK"
                         STATUS=1
-                        with open('data.json', 'r') as fp:
-                            userInfoDict = json.load(fp)
+                        #with open('data.json', 'r') as fp:
+                         #   userInfoDict = json.load(fp)
 
                         userInfoDict[paramList[0]] = [paramList[1], paramList[2], paramList[3], paramList[4],None]
 
@@ -203,8 +202,8 @@ class ServerThread(threading.Thread):
             #     nbUser=( request[paramIndex+1:] ).strip()
             i = 0
             paramList = ""
-            with open('data.json', 'r') as fp:
-                userInfoDict = json.load(fp)
+            #with open('data.json', 'r') as fp:
+             #   userInfoDict = json.load(fp)
 
             for key in userInfoDict.keys():
                 if i < NUMBER_OF_USERLIST:
@@ -237,10 +236,10 @@ class ServerThread(threading.Thread):
                     msgToSign=paramList[0]
                     hash = SHA256.new(msgToSign.encode()).digest()
                     print(hash)
-                    signature = private_key.sign(hash, '')
-                    msgToSend = "MYPUB:" + str( (public_key.exportKey()).decode() ) + '$' + str(signature)
-                    pkstring = public_key.exportKey()
-                    #pkstring = public_key
+                    signature = my_private_key.sign(hash, '')
+                    msgToSend = "MYPUB:" + str( (my_public_key.exportKey()).decode() ) + '$' + str(signature)
+                    pkstring = my_public_key.exportKey()
+                    #pkstring = my_public_key
                     print(pkstring)
                     ####msgToSend = "MYPUB:".encode() + pkstring
                     #msgToSend = "MYPUB:" + str(pkstring) + '$' + str(signature)
@@ -325,6 +324,7 @@ class ClientThread(threading.Thread):
         pass
 
     def control(self):
+        global userInfoDict
         log = self.threadName + " : " + "is controlling."
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         mySocket = socket.socket()  # Create a socket object
@@ -358,22 +358,25 @@ class ClientThread(threading.Thread):
             print(type(pub_sifrelimesaj[0]))
             print("PKKK = " + pub_sifrelimesaj[0])
             print("sifreli mesaj = " + pub_sifrelimesaj[1])
-            key = RSA.importKey((pub_sifrelimesaj[0]).encode())
+            pubkey = RSA.importKey((pub_sifrelimesaj[0]).encode())
             hash= SHA256.new("BUNUIMZALA".encode()).digest()
             print(hash)
             print((pub_sifrelimesaj[1]).encode())
             signature = int(pub_sifrelimesaj[1][1:-1].split(",")[0])
             signature = (signature, '')
-            is_verified = key.verify(hash,signature)
+            is_verified = pubkey.verify(hash,signature)
             #is_verified = key.verify(hash,(pub_sifrelimesaj[1]).encode())
-            with open('data.json', 'r') as fp:
-                userInfoDictt = json.load(fp)
+            #with open('data.json', 'r') as fp:
+             #   userInfoDictt = json.load(fp)
             if(is_verified == True):
-                for k in userInfoDictt.keys():
+                for k in userInfoDict.keys():
                     print("KKKKKKK")
-                    print((userInfoDictt[k])[0])
-                    if (userInfoDictt[k])[0]==self.hostToConnect and (userInfoDictt[k])[1]==self.portToConnect:
-                        (userInfoDictt[k])[4] = key
+                    print((userInfoDict[k])[0])
+                    if (userInfoDict[k])[0]==self.hostToConnect and (userInfoDict[k])[1]==self.portToConnect:
+                        print("KEYI ATAMAM LAZIM")
+                        (userInfoDict[k])[4] = str(pubkey.exportKey())
+                        with open('data.json', 'w') as fp:
+                            json.dump(userInfoDict, fp)
                 response = "PUBOK"
             else:
                 response = "PUBER"

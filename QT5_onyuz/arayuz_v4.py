@@ -1,8 +1,13 @@
 import sys
-sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
+import uuid
+import json
 
-from PyQt5 import QtWidgets, QtGui, QtCore
-from Yayinci_Blogger import Yayinci_v2_2 as yay
+sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
+#sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
+#sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
+
+from PyQt5 import QtWidgets
+from Yayinci_Blogger import Yayinci_v4 as yay
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 my_blog_list = []
 
@@ -10,8 +15,6 @@ import threading
 import queue
 import socket
 import time
-
-
 
 
 class ProjectUi(QtWidgets.QMainWindow):
@@ -42,8 +45,10 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def initializeIpPort(self):
         self.ui.ip_field.setText("127.0.0.1")
-        self.ui.port_field.setText("12342")
+        self.ui.port_field.setText("12346")
         self.ui.username_field.setText("Mustafa")
+        self.UUIDtoConnect=uuid.uuid4()
+
 
     def connect(self):
         self.get_host_with_port()
@@ -51,6 +56,11 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def pubkey_button(self):
         # pubkey buttonuna basıldığında gerçekleştirilecek eylem
+        request="PBKEY:"+"BUNUIMZALA"
+        # myClient = yay.ClientThread("Client Thread", self.UUIDtoConnect ,self.ip, self.port, request, self.logQueue)
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        response = myClient.control()
+        self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
         pass
 
     def refresh_feed_button(self):
@@ -80,11 +90,7 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def logout_button(self):
         # logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
-        # self.close()
-        request="PBKEY:"+"BUNUIMZALA"
-        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
-        response = myClient.control()
-        self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
+        self.close()
 
 
 
@@ -95,25 +101,16 @@ class ProjectUi(QtWidgets.QMainWindow):
         # ip ve port alma işlemi
         self.ip = self.ui.ip_field.text()
         self.port = self.ui.port_field.text()
-        name = self.ui.username_field.text()
+        self.UUID ="AraciUUID"
+        yay.userInfoDict[self.UUID]=[ self.ip,self.port,"AraciName","NEGOTIATOR", None ]
+        with open('../Yayinci_Blogger/data.json', 'w') as fp:
+            json.dump(yay.userInfoDict, fp)
 
-        request = "UINFO"
-        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
-        response = myClient.control()
-
+        name=self.ui.username_field.text()
+        request="UINFO"
+        myClient=yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        response=myClient.control()
         self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
-
-        #self.ui.plainTextEdit_4.setPlainText(i)
-
-        # for i in range(10):
-        #    self.ui.listWidget.addItem('Item %s' %(i+1))
-
-        #item = QtGui.QListWidgetItem()
-        # item = QtWidgets.QListWidgetItem0
-        # item.setText(QtGui.QGuiApplication.translate("Dialog",'x',None,))
-        # item.setFlags(item.flags() | QtCore.Qt.ItemIsUserCheckable)
-        # item.setCheckState(QtCore.Qt.Unchecked)
-        # self.listWidget.addItem(item)
 
     def change_profile_name(self):
         # kullanıcı adını bağlandığında otomatik olarak değiştirme
@@ -123,7 +120,7 @@ class ProjectUi(QtWidgets.QMainWindow):
     def share_twit_button(self):
         text = self.ui.Twit_field.toPlainText()
         request = text.strip()
-        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        myClient = yay.ClientThread("Client Thread", self.UUIDtoConnect, self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
         self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")

@@ -69,11 +69,14 @@ print("my UUID = " + str(myUUID))
 
 
 # tmpUUID="yasemin"
-# userInfoDict[tmpUUID]=["yadress", "yPort", "yNanme", "yNEGOTIATOR"]
+# userInfoDict[tmpUUID]=["yadress", "yPort", "yNanme", "yNEGOTIATOR",None]
 # tmpUUID="orhan"
-# userInfoDict[tmpUUID]=["oadress", "oPort", "oNanme", "oNEGOTIATOR"]
+# userInfoDict[tmpUUID]=["oadress", "oPort", "oNanme", "oNEGOTIATOR",None]
 # tmpUUID="a"
-# userInfoDict[tmpUUID]=["4", "4", "4", "4"]
+# userInfoDict[tmpUUID]=["4", "4", "4", "4",None]
+# with open('data.json', 'w') as fp:
+#     json.dump(userInfoDict, fp)
+
 
 # loglama işlemini yapacak thread tanımlanıyor.
 class loggerThread(threading.Thread):
@@ -155,6 +158,8 @@ class ServerThread(threading.Thread):
                     # print('UUID:' + UUIDtoCheck)
                     if str(response[6:]) == str(UUIDtoCheck):
                         msg = "CONOK"
+                        print("AAAAAAAAAAAAAAAAAAAAA")
+                        print(userInfoDict[paramList[0]])
                         STATUS = 1
                         userInfoDict[paramList[0]] = [paramList[1], paramList[2], paramList[3], paramList[4]]
                         with open('data.json', 'w') as fp:
@@ -370,33 +375,6 @@ class ClientThread(threading.Thread):
         log = self.threadName + " : " + "response is " + ""
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         return ""
-
-    def publicKey_control(self):
-        log = self.threadName + " : " + "Public Key is controlling."
-        self.logQueue.put(time.ctime() + "\t\t - " + log)
-        mySocket = socket.socket()  # Create a socket object
-        host = self.hostToConnect  # Connection point (localhost)
-        port = self.portToConnect  # Reserve a port for your service.
-
-        mySocket.connect((host, int(port)))
-
-        prot = self.cmnd[:5]
-
-        pub = mySocket.recv(1024)
-        mySocket.close()  # Close the socket when done
-
-        print(type(pub))
-        #
-        #     if(signd == self.cmnd[7:]):
-        #         response = "PUBOK"
-        #     else:
-        #         response = "PUBER"
-        #
-        #     return response
-        # log = self.threadName + " : " + "response is " + ""
-        # self.logQueue.put(time.ctime() + "\t\t - " + log)
-        return ""
-
 
 class UserInputThread(threading.Thread):
     def __init__(self, threadname, logQueue):
