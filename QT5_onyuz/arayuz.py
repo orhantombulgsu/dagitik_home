@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
-from Aracı_Negotiator import Araci_v5 as ar
+from Araci_Negotiator import Araci_v5 as ar
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 
 my_blog_list = []

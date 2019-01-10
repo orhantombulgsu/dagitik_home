@@ -6,8 +6,8 @@ import uuid
 import json
 # import sys
 
-# sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
-# import QT5_onyuz.dagitik_proje_main
+#sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
+#import QT5_onyuz.dagitik_proje_main
 
 from Crypto.PublicKey import RSA
 from Crypto import Random
@@ -34,10 +34,7 @@ if(f_priv and f_pub):
 f_priv.close()
 f_pub.close()
 
-
-
 my_blog_list = []
-
 
 STATUS = 0
 

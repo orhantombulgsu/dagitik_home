@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtGui, QtCore
 import sys
-from Aracı_Negotiator import Araci_with_2_threads, Araci_with_2_threads_Logger
+from Araci_Negotiator import Araci_with_2_threads, Araci_with_2_threads_Logger
 from QT5_onyuz.dagitik_proje_ui import Ui_MainWindow
 import threading
 my_blog_list = []
