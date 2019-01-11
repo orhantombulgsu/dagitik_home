@@ -45,16 +45,16 @@ STATUS = 0
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
 SERVER_PORT  = 12345
-SERVER_PORT2 = 12315
+SERVER_PORT2 = 12341
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 #SERVER_HOST = "127.0.0.1"
 #TYPE = "NEGOTIATOR"
-SERVER_HOST="172.20.10.4"
+SERVER_HOST="172.20.10.9"
 SERVER_HOST_2="172.20.10.10"
-TYPE="YAY"
+TYPE="YAYINCI"
 
 NUMBER_OF_USERLIST = 5
-NAME = "MUSTAFA"
+NAME = "YASEMIN"
 
 serverQueue = queue.Queue()
 clientQueue = queue.Queue()
@@ -70,7 +70,7 @@ except FileNotFoundError:
     with open('data.json', 'w') as fp:
         json.dump(userInfoDict, fp)
 
-myUUID = uuid.uuid4()
+myUUID = uuid.uuid1()
 print("my UUID = " + str(myUUID))
 
 

@@ -18,11 +18,11 @@ import queue
 import socket
 import time
 
-#suggest_checkboxlist = []
+
 #followed_checkboxlist = []
 #blocked_checkboxlist = []
 #followers_checkboxlist = []
-#usernamelist = []
+
 #username1 = 'orhan'
 #username2 = 'yasemin'
 #username3 = 'mustafa'
@@ -110,26 +110,41 @@ class ProjectUi(QtWidgets.QMainWindow):
         #blocked_checkboxlist.append(blkchbx5)
 
     def users_button(self):
-
+        suggest_checkboxlist = []
+        usernamelist = []
         request="LSUSR"
         myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
         self.ui.LogLabel_field.setText("XXX"+response+"XXX")
-        #suggest_checkboxlist.append(self.ui.sugchbx1)
-        #suggest_checkboxlist.append(self.ui.sugchbx2)
-        #suggest_checkboxlist.append(self.ui.sugchbx3)
-        #suggest_checkboxlist.append(self.ui.sugchbx4)
-        #suggest_checkboxlist.append(self.ui.sugchbx5)
-#
+        users = response[6:].split("$")
+        i=0;
+        userList=dict()
+        for u in users:
+            print(u)
+            x=u.split(",")
+            userList[x[0]] = [   x[1],x[2],x[3],x[4], None ]
+            suggest_checkboxlist.append(userList[x[0]])
+            usernamelist.append(x[3])
+
+        suggest_checkboxlist.append(self.ui.sugchbx1)
+        self.ui.sugchbx1.setText(usernamelist[0])
+        suggest_checkboxlist.append(self.ui.sugchbx2)
+        self.ui.sugchbx2.setText(usernamelist[1])
+        suggest_checkboxlist.append(self.ui.sugchbx3)
+        self.ui.sugchbx3.setText(usernamelist[2])
+        suggest_checkboxlist.append(self.ui.sugchbx4)
+        self.ui.sugchbx4.setText(usernamelist[3])
+        suggest_checkboxlist.append(self.ui.sugchbx5)
+        self.ui.sugchbx5.setText(usernamelist[4])
         #usernamelist.append(username1)
         #usernamelist.append(username2)
         #usernamelist.append(username3)
         #usernamelist.append(username4)
         #print(usernamelist)
 #
-        #for i in range(4):
-        #    suggest_checkboxlist[i].setText(usernamelist[i])
-#
+        # for i in range(4):
+        #     suggest_checkboxlist[i].setText(usernamelist[i])
+
         # for i in suggest_checkboxlist:
         #    nameofchbox = i.setText(i.text())
         # for i in suggest_checkboxlist:
@@ -146,7 +161,7 @@ class ProjectUi(QtWidgets.QMainWindow):
     def initializeIpPort(self):
         self.ui.ip_field.setText(str(yay.SERVER_HOST_2))
         self.ui.port_field.setText(str(yay.SERVER_PORT2))
-        self.ui.username_field.setText("Orhan")
+        self.ui.username_field.setText("Yasemin")
         #self.UUIDtoConnect=uuid.uuid4()
 
     def connect(self):
