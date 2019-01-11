@@ -242,8 +242,9 @@ class ProjectUi(QtWidgets.QMainWindow):
        # ip ve port alma işlemi
         self.ip = self.ui.ip_field.text()
         self.port = self.ui.port_field.text()
+        self.name = self.ui.username_field.text()
         self.UUID ="AraciUUID"
-        yay.userInfoDict[self.UUID]=[ self.ip,self.port,"AraciName","NEGOTIATOR", None ]
+        yay.userInfoDict[self.UUID]=[ self.ip,self.port,self.name,"NEGOTIATOR", None ]
         with open('../Yayinci_Blogger/data.json', 'w') as fp:
             json.dump(yay.userInfoDict, fp)
 
