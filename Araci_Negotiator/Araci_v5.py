@@ -14,7 +14,7 @@ CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
 SERVER_PORT  = 12341
 SERVER_PORT2 = 12342
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
-SERVER_HOST = "127.0.0.1"
+SERVER_HOST = "172.20.10.10"
 TYPE = "NEGOTIATOR"
 
 NUMBER_OF_USERLIST = 5

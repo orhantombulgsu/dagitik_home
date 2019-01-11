@@ -107,7 +107,11 @@ class ProjectUi(QtWidgets.QMainWindow):
         #blocked_checkboxlist.append(blkchbx5)
 
     def users_button(self):
-        pass
+
+        request="LSUSR"
+        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        response = myClient.control()
+        self.ui.LogLabel_field.setText("XXX"+response+"XXX")
         #suggest_checkboxlist.append(self.ui.sugchbx1)
         #suggest_checkboxlist.append(self.ui.sugchbx2)
         #suggest_checkboxlist.append(self.ui.sugchbx3)
@@ -152,7 +156,7 @@ class ProjectUi(QtWidgets.QMainWindow):
         # myClient = yay.ClientThread("Client Thread", self.UUIDtoConnect ,self.ip, self.port, request, self.logQueue)
         myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
-        self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
+        self.ui.LogLabel_field.setText("XXX"+response+"XXX")
 
     def refresh_feed_button(self):
         # takip edilen kişilerin serverlarına istek atarak twitleri yeniler
@@ -229,7 +233,7 @@ class ProjectUi(QtWidgets.QMainWindow):
         request="UINFO"
         myClient=yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response=myClient.control()
-        self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
+        self.ui.LogLabel_field.setText("XXX" + response + "XXX")
 
     def change_profile_name(self):
         # kullanıcı adını bağlandığında otomatik olarak değiştirme
