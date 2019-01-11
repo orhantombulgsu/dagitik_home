@@ -123,7 +123,7 @@ class ProjectUi(QtWidgets.QMainWindow):
     def share_twit_button(self):
         text = self.ui.Twit_field.toPlainText()
         request = text.strip()
-        myClient = ar.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        myClient =yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
         response = myClient.control()
 
         self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
