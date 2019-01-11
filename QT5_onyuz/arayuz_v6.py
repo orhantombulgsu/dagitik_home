@@ -2,6 +2,8 @@ import sys
 import json
 
 sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
+#sys.path.insert(0, '/home/mustafa/PycharmProjects/dagitik_home_group4')
+#sys.path.insert(0, '/home/admin/dagitik_home_group4')
 
 from PyQt5 import QtWidgets, QtGui, QtCore
 from Yayinci_Blogger import Yayinci_v5 as yay
