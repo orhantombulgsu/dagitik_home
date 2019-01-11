@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'dagitik_proje.ui'
+# Form implementation generated from reading ui file 'dagitik_proje_v2.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.2
 #
@@ -102,7 +102,7 @@ class Ui_MainWindow(object):
         self.SendMessage_field.setGeometry(QtCore.QRect(640, 310, 181, 161))
         self.SendMessage_field.setObjectName("SendMessage_field")
         self.LogLabel_field = QtWidgets.QLabel(self.centralwidget)
-        self.LogLabel_field.setGeometry(QtCore.QRect(9, 492, 62, 17))
+        self.LogLabel_field.setGeometry(QtCore.QRect(9, 492, 811, 17))
         self.LogLabel_field.setObjectName("LogLabel_field")
         self.LogOut_button = QtWidgets.QPushButton(self.centralwidget)
         self.LogOut_button.setGeometry(QtCore.QRect(750, 10, 71, 21))

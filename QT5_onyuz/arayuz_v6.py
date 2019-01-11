@@ -3,6 +3,7 @@ import json
 
 sys.path.insert(0, '/home/yasemin/PycharmProjects/dagitik_home_group4-master/dagitik_home_group4')
 
+
 from PyQt5 import QtWidgets, QtGui, QtCore
 from Yayinci_Blogger import Yayinci_v5 as yay
 from QT5_onyuz.dagitik_proje_v2_ui import Ui_MainWindow
