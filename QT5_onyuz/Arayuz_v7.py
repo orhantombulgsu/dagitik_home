@@ -19,14 +19,6 @@ import socket
 import time
 
 
-#followed_checkboxlist = []
-#blocked_checkboxlist = []
-#followers_checkboxlist = []
-
-#username1 = 'orhan'
-#username2 = 'yasemin'
-#username3 = 'mustafa'
-#username4 = 'zeki'
 
 
 class ProjectUi(QtWidgets.QMainWindow):
@@ -55,6 +47,7 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.initializeIpPort()
         self.initialize_button_conf()
         self.initializeMyBlogsList()
+        #self.initializeLists()
 
     def initializeMyBlogsList(self):
         try:
@@ -72,6 +65,33 @@ class ProjectUi(QtWidgets.QMainWindow):
         except FileNotFoundError:
             pass
 
+    # def read_from_file(self, filename, fieldName):
+    #     try:
+    #         with open(filename, 'r') as fp:
+    #             retList = json.load(fp)
+    #
+    #             for item in retList:
+    #                 fieldName.addItem(item)
+    #         return retList
+    #
+    #     except FileNotFoundError:
+    #         pass
+    #
+    # def write_to_file(self, filename, list):
+    #     try:
+    #         with open('data.json', 'w') as fp:
+    #             json.dump(list, fp)
+    #
+    #     except FileNotFoundError:
+    #         pass
+    #
+    # def initializeLists(self):
+    #     yay.my_blog_list = self.read_from_file( "MyBlogs.json", self.ui.MyBlogList_field)
+    #     yay.my_followed_list = self.read_from_file( "MyFollowed.json", self.ui.Followed_field)
+    #     yay.my_followers_list = self.read_from_file( "MyFollowers.json", self.ui.Followers_field)
+    #     yay.my_mainpage = self.read_from_file( "MyMainpage.json", self.ui.Feeds_field)
+    #     #yay.my_inbox_list = self.read_from_file( "MyInbox.json", self.ui.Inbox_field)
+    #     yay.my_blacklist = self.read_from_file( "MyBlacklist.json", self.ui.Blocked_field)
 
     def initialize_button_conf(self):
         pass
@@ -193,17 +213,56 @@ class ProjectUi(QtWidgets.QMainWindow):
 
     def block_button(self):
         # Followers içindeki kullanıcılardan check edilenleri engelleyecektir.
+
+        # request="BLOCK:"+yay.myUUID
+        # # myClient = yay.ClientThread("Client Thread", self.UUIDtoConnect ,self.ip, self.port, request, self.logQueue)
+        # myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        # response = myClient.control()
+        # self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
+        # opp_uuid = self.findUUIDbyHostAndPort(self.ip, self.port)
+        # yay.my_blacklist.append(opp_uuid)
+        # self.write_to_file("MyBlacklist.json",yay.my_blacklist)
         pass
 
     def unblock_button(self):
         # Blocked içindeki kullanıcılardan check edilenlerin engellerini kaldıracaktır.
+
+        # request="UNBLC:"+yay.myUUID
+        # # myClient = yay.ClientThread("Client Thread", self.UUIDtoConnect ,self.ip, self.port, request, self.logQueue)
+        # myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        # response = myClient.control()
+        # self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
+        # opp_uuid = self.findUUIDbyHostAndPort(self.ip, self.port)
+        # yay.my_followers_list.append(opp_uuid)
+        # self.write_to_file("MyFollowers.json",yay.my_followers_list)
         pass
 
     def unsubscribe_button(self):
         # Followed içindeki kullanıcılardan check edilenleri takipten çıkacaktır.
+
+        # request="UNSUB:"+yay.myUUID
+        # # myClient = yay.ClientThread("Client Thread", self.UUIDtoConnect ,self.ip, self.port, request, self.logQueue)
+        # myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        # response = myClient.control()
+        # self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
+        # opp_uuid = self.findUUIDbyHostAndPort(self.ip, self.port)
+        # yay.my_followed_list.remove(opp_uuid)
+        # self.write_to_file("MyFollowed.json",yay.my_followed_list)
         pass
 
     def subscribe_button(self):
+        # Suggested users içindeki kullanıcılardan check edilenleri takip edecektir.
+
+        # request="SUBSC:"+yay.myUUID
+        # # myClient = yay.ClientThread("Client Thread", self.UUIDtoConnect ,self.ip, self.port, request, self.logQueue)
+        # myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+        # response = myClient.control()
+        # self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
+        # opp_uuid = self.findUUIDbyHostAndPort(self.ip, self.port)
+        # if(response == "SUBOK"):
+        #     yay.my_followed_list.append(opp_uuid)
+        #     self.write_to_file("MyFollowed.json",yay.my_followed_list)
+
         pass
         # Suggested users içindeki kullanıcılardan check edilenleri takip edecektir.
         #followed_checkboxlist=[]
@@ -233,12 +292,8 @@ class ProjectUi(QtWidgets.QMainWindow):
 #
 
     def logout_button(self):
-        # logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
-        # self.close()
-        request = "PBKEY:" + "BUNUIMZALA"
-        myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
-        response = myClient.control()
-        self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
+        #logout ui kapatma olarak tasarlanmıştır. ileride connection close olarak değiştirilebilir
+        self.close()
 
     def disable_button(self):
         self.ui.connect_button.setDisabled(True)
@@ -264,6 +319,14 @@ class ProjectUi(QtWidgets.QMainWindow):
         username = self.ui.username_field.text()
         self.ui.UserNameLabel_field.setText(username)
 
+    # def sendMyBlog(self):
+    #     request="SBLOG:"+str(yay.myUUID)+"$"+self.ui.Twit_field.toPlainText()+"\n"
+    #     # myClient = yay.ClientThread("Client Thread", self.UUIDtoConnect ,self.ip, self.port, request, self.logQueue)
+    #     myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
+    #     response = myClient.control()
+    #     self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
+    #     #opp_uuid = self.findUUIDbyHostAndPort(self.ip, self.port)
+
     def share_twit_button(self):
         myBlog = self.ui.Twit_field.toPlainText()+"\n"
         yay.my_blog_list.append(myBlog)
@@ -274,12 +337,14 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.ui.MyBlogList_field.addItem(myBlog)
         self.ui.Twit_field.clear()
 
-        #text = self.ui.Twit_field.toPlainText()
-        #request = text.strip()
-        #myClient = yay.ClientThread("Client Thread", self.ip, self.port, request, self.logQueue)
-        #response = myClient.control()
-        #self.ui.SuggestedUser_field.addItem("XXX" + response + "XXX")
-
+        # myBlog = self.ui.Twit_field.toPlainText()+"\n"
+        # self.ui.Feeds_field.addItem("YYYYYYYYYYYAAAAAAAAAA")
+        # self.ui.Feeds_field.addItem(yay.my_blog_list)
+        # #yay.my_blog_list.append(myBlog)
+        # self.sendMyBlog()
+        # self.write_to_file("MyBlogs.json",yay.my_blog_list)
+        # self.ui.MyBlogList_field.addItem(myBlog)
+        # self.ui.Twit_field.clear()
         '''
         # share butonu ile my blog içerisine twit paylaşımı burası degisecek
         text = self.ui.plainTextEdit_4.toPlainText()

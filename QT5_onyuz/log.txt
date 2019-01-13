@@ -73,3 +73,18 @@ Fri Jan 11 10:52:06 2019 - Fri Jan 11 10:52:06 2019		 - Client Thread : response
 Fri Jan 11 10:52:08 2019 - Fri Jan 11 10:52:08 2019		 - Client Thread : is controlling.
 Fri Jan 11 10:52:08 2019 - Fri Jan 11 10:52:08 2019		 - Client Thread : sending a message : LSUSR
 Fri Jan 11 10:52:08 2019 - Fri Jan 11 10:52:08 2019		 - Client Thread : response is LSUOK:bdc69052-a8da-40bd-977a-57a7fba27fad,172.20.10.9,12345,YASEMIN,YAY$e43f152b-d2ad-400c-aa0e-df2438823225,172.20.10.4,12345,MUSTAFA,YAY$4b4f4495-8b91-4f32-b45a-f38ae8cade71,172.20.10.4,12345,MUSTAFA,YAY
+Fri Jan 11 11:23:53 2019 - Logger starting.
+Fri Jan 11 11:23:53 2019 - Fri Jan 11 11:23:53 2019		 - User Input Thread : is starting.
+Fri Jan 11 11:23:53 2019 - Fri Jan 11 11:23:53 2019		 - Waiting for connection from any client via port number 12345
+Fri Jan 11 11:23:56 2019 - Fri Jan 11 11:23:56 2019		 - Client Thread : is controlling.
+Fri Jan 11 11:23:56 2019 - Fri Jan 11 11:23:56 2019		 - Client Thread : sending a message : UINFO:3b72e556-157a-11e9-baf9-240a646955bb$172.20.10.9$12345$YASEMIN$YAYINCI
+Fri Jan 11 11:23:57 2019 - Fri Jan 11 11:23:57 2019		 - Got connection from ('172.20.10.10', 41628)
+Fri Jan 11 11:23:57 2019 - Fri Jan 11 11:23:57 2019		 - Server thread starting.
+Fri Jan 11 11:23:57 2019 - Fri Jan 11 11:23:57 2019		 - Waiting for connection from any client via port number 12345
+Fri Jan 11 11:23:57 2019 - Fri Jan 11 11:23:57 2019		 - Server thread received a message : CHECK
+Fri Jan 11 11:23:57 2019 - Fri Jan 11 11:23:57 2019		 - Server thread : MUUID:3b72e556-157a-11e9-baf9-240a646955bb
+Fri Jan 11 11:23:57 2019 - Fri Jan 11 11:23:57 2019		 - Server thread sent a message : MUUID:3b72e556-157a-11e9-baf9-240a646955bb
+Fri Jan 11 11:23:57 2019 - Fri Jan 11 11:23:57 2019		 - Client Thread : response is CONOK
+Fri Jan 11 11:23:58 2019 - Fri Jan 11 11:23:58 2019		 - Client Thread : is controlling.
+Fri Jan 11 11:24:00 2019 - Fri Jan 11 11:24:00 2019		 - Client Thread : sending a message : LSUSR
+Fri Jan 11 11:24:00 2019 - Fri Jan 11 11:24:00 2019		 - Client Thread : response is LSUOK:f6bc3924-255b-489d-aa89-a17b059ba57f,127.0.0.1,12345,MUSTAFA,NEGOTIATOR$28e2b66e-157a-11e9-baf9-240a646955bb,172.20.10.9,12345,YASEMIN,YAYINCI$01ab5582-7bde-4dc7-89ac-71ac2a02cedb,172.20.10.9,12345,MUSTAFA,YAY$3b72e556-157a-11e9-baf9-240a646955bb,172.20.10.9,12345,YASEMIN,YAYINCI$25d756c8-157a-11e9-b6a4-7c7a91e4a1e7,172.20.10.4,12345,Orhan,YAYINCI

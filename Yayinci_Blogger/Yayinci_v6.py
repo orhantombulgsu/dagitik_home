@@ -34,6 +34,12 @@ f_pub.close()
 
 my_blog_list = []
 my_mainpage = []
+
+# my_followed_list=[]
+# my_followers_list = []
+# my_blacklist = []
+# my_inbox_list = []
+
 BLOG = 0
 
 
@@ -57,10 +63,8 @@ NAME = "YASEMIN"
 serverQueue = queue.Queue()
 clientQueue = queue.Queue()
 
-# uuid.NAMESPACE_DNS.hex # dagdelenin metodu(MAC E göre)
-
-
 userInfoDict = dict()
+
 try:
     with open('data.json', 'r') as fp:
         userInfoDict = json.load(fp)
@@ -146,18 +150,13 @@ class ServerThread(threading.Thread):
 
         elif prot == "UINFO":  # YENI KULLANICI İSTEĞİ /KULLANICI BAĞLANTI KONTROLU
             paramIndex = request.find(":")
-            # print("UINFODAYIM= " + str(paramIndex))
             if (not paramIndex == -1):
-                # print("paramiGectimBenreaderPArserim " + request + " ServerReaderThread")
                 paramList = ((request[paramIndex + 1:]).strip()).split('$')
-                # print("paramList[0]= "+ str(paramList[0]))
-                #with open('data.json', 'r') as fp:
-                 #   userInfoDict = json.load(fp)
 
                 if paramList[0] in userInfoDict.keys():
                     response = "CHKED"
-                # userInfoList[paramList[0]]=list(paramList[1],paramList[2],paramList[3],paramList[4])
-                else:  # BEKLE AZ SEN
+
+                else:  # Kontrol için bekletme
                     UUIDtoCheck = paramList[0]
                     # clientQueue.put("CHECK")
                     myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), "CHECK", self.logQueue)
@@ -167,8 +166,6 @@ class ServerThread(threading.Thread):
                     if str(response[6:]) == str(UUIDtoCheck):
                         msg = "CONOK"
                         STATUS=1
-                        #with open('data.json', 'r') as fp:
-                         #   userInfoDict = json.load(fp)
 
                         userInfoDict[paramList[0]] = [paramList[1], paramList[2], paramList[3], paramList[4],None]
 
@@ -201,19 +198,13 @@ class ServerThread(threading.Thread):
             response = "BYBYE"
 
         elif prot == "LSUSR":  # KULLANICI LISTE PAYLASIMI
-            # paramIndex=request.find(":")
-            # if(not paramIndex == -1):
-            #     nbUser=( request[paramIndex+1:] ).strip()
             i = 0
             paramList = ""
-            #with open('data.json', 'r') as fp:
-             #   userInfoDict = json.load(fp)
 
             for key in userInfoDict.keys():
                 if i < NUMBER_OF_USERLIST:
                     param = key + "," + userInfoDict.get(key)[0] + "," + userInfoDict.get(key)[1] + "," + \
                             userInfoDict.get(key)[2] + "," + userInfoDict.get(key)[3]
-                    # print("PARAMMMMMMM"+param)
                     paramList += param + "$"
                 else:
                     break
@@ -227,32 +218,25 @@ class ServerThread(threading.Thread):
 
 
 
-        ##BURDAN ITIBAREN YAYINCI ICIN OLANLAR
+        ##BURADAN ITIBAREN YAYINCI ICIN OLANLAR
         elif prot == "PBKEY":  # public_key paylasimi
             if (STATUS == 0):
                 response = "CFAIL"
             else:
                 paramIndex = request.find(":")
-                # print("UINFODAYIM= " + str(paramIndex))
                 if (not paramIndex == -1):
-                    # print("paramiGectimBenreaderPArserim " + request + " ServerReaderThread")
                     paramList = ((request[paramIndex + 1:]).strip()).split('$')
                     msgToSign=paramList[0]
                     hash = SHA256.new(msgToSign.encode()).digest()
                     print(hash)
+
                     signature = my_private_key.sign(hash, '')
                     msgToSend = "MYPUB:" + str( (my_public_key.exportKey()).decode() ) + '$' + str(signature)
+
                     pkstring = my_public_key.exportKey()
-                    #pkstring = my_public_key
                     print(pkstring)
-                    ####msgToSend = "MYPUB:".encode() + pkstring
-                    #msgToSend = "MYPUB:" + str(pkstring) + '$' + str(signature)
-                    #print("MYPUBBBB  "+msgToSend)
-                    #myClient = ClientThread("Client Thread", SERVER_HOST, int(SERVER_PORT), msgToSend, self.logQueue)
-                    #response = myClient.control()
+
                     self.mySocket.send(msgToSend.encode())
-                    #myClient = ClientThread("Client Thread", SERVER_HOST, int(SERVER_PORT), "MYPUB", self.logQueue)
-                    #response = myClient.publicKey_control()
 
                     if response[:5] == "PUBOK":
                         print("PUBOK GELDİİ")
@@ -265,21 +249,82 @@ class ServerThread(threading.Thread):
 
 
         ##BURADAN ITIBAREN SIFRELILER
-        elif prot == "SNDMB":
-            if (STATUS == 0):
-                response = "CFAIL"
-            else:
-                numberOfBlogs = int(request[7:])
-                response =  "MYMBS:"+my_blog_list[0:numberOfBlogs]
 
-        elif prot == "SBLOG":
-            if (STATUS == 0):
-                response = "CFAIL"
-            else:
-                my_mainpage.append(request[7:])
-                print("MAINNNNNNNNNN: ")
-                print(my_mainpage)
-                response = "BLGOK"
+
+        # elif prot == "SNDMB":
+        #     paramIndex = request.find(":")
+        #
+        #     if (not paramIndex == -1):
+        #         paramList = ((request[paramIndex + 1:]).strip()).split('$')
+        #         recv_uuid = paramList[0]
+        #         if(not recv_uuid in userInfoDict.keys):
+        #             response = "CFAIL"
+        #         else:
+        #             if recv_uuid in my_blacklist:
+        #                 response = "BLCKD"
+        #             else:
+        #                 numberOfBlogs = int(paramList[1])
+        #                 response =  "MYMBS:"+my_blog_list[0:numberOfBlogs]
+        #
+        #
+        # elif prot == "SBLOG":
+        #     paramIndex = request.find(":")
+        #
+        #     if (not paramIndex == -1):
+        #         paramList = ((request[paramIndex + 1:]).strip()).split('$')
+        #         recv_uuid = uuid.UUID(paramList[0])
+        #         if(not recv_uuid in userInfoDict.keys):
+        #             response = "CFAIL"
+        #         else:
+        #             if recv_uuid in my_blacklist:
+        #                 response = "BLCKD"
+        #             else:
+        #                 my_mainpage.append(paramList[1])
+        #                 print("MAINPAGE: ")
+        #                 print(my_mainpage)
+        #                 response = "BLGOK"
+        #
+        # elif prot == "BLOCK":
+        #     paramIndex = request.find(":")
+        #
+        #     if (not paramIndex == -1):
+        #         paramList = ((request[paramIndex + 1:]).strip()).split('$')
+        #         recv_uuid = uuid.UUID(paramList[0])
+        #         if(not recv_uuid in userInfoDict.keys):
+        #             response = "CFAIL"
+        #         else:
+        #             response = "BLCOK"
+        #
+        # elif prot == "UNBLC":
+        #     paramIndex = request.find(":")
+        #
+        #     if (not paramIndex == -1):
+        #         paramList = ((request[paramIndex + 1:]).strip()).split('$')
+        #         recv_uuid = uuid.UUID(paramList[0])
+        #         if(not recv_uuid in userInfoDict.keys):
+        #             response = "CFAIL"
+        #         else:
+        #             response = "UNBOK"
+        #
+        #
+        # elif prot == "SUBSC":
+        #     recv_uuid = uuid.UUID(request[6:])
+        #     if(not recv_uuid in userInfoDict.keys):
+        #         response = "CFAIL"
+        #     else:
+        #         if recv_uuid in my_blacklist:
+        #             response = "BLCKD"
+        #         else:
+        #             response = "SUBOK"
+        #             my_followers_list.append(recv_uuid)
+        #
+        # elif prot == "UNSUB":
+        #     recv_uuid = uuid.UUID(request[6:])
+        #     if(not recv_uuid in userInfoDict.keys):
+        #         response = "CFAIL"
+        #     else:
+        #         response = "USBOK"
+        #         my_followers_list.remove(recv_uuid)
 
         else:
             response = "ERROR"
@@ -322,13 +367,11 @@ class ClientThread(threading.Thread):
 
         log = self.threadName + " : " + "sending a message : " + textToSend
         self.logQueue.put(time.ctime() + "\t\t - " + log)
-        # print(s.recv(1024).decode())  # blocking'dir
-        #print("ClientThread:GönderilenMesaj=" + textToSend)
         mySocket.send((textToSend.strip()).encode())
         response = ((mySocket.recv(1024)).decode()).strip()
         print(type(response))
         #print("ClientThread:AlinanMesaj=" + response)
-        mySocket.close()  # Close the socket when done
+        mySocket.close()
 
 
         if(response[:5] == "MYPUB"):
@@ -343,26 +386,22 @@ class ClientThread(threading.Thread):
             signature = int(pub_sifrelimesaj[1][1:-1].split(",")[0])
             signature = (signature, '')
             is_verified = pubkey.verify(hash,signature)
-            #is_verified = key.verify(hash,(pub_sifrelimesaj[1]).encode())
-            #with open('data.json', 'r') as fp:
-             #   userInfoDictt = json.load(fp)
+
             if(is_verified == True):
                 for k in userInfoDict.keys():
-                    print("KKKKKKK")
                     print((userInfoDict[k])[0])
                     if (userInfoDict[k])[0]==self.hostToConnect and (userInfoDict[k])[1]==self.portToConnect:
-                        print("KEYI ATAMAM LAZIM")
+                        #print("KEYI ATAMAM LAZIM")
                         (userInfoDict[k])[4] = str(pubkey.exportKey())
                         with open('data.json', 'w') as fp:
                             json.dump(userInfoDict, fp)
                 response = "PUBOK"
             else:
                 response = "PUBER"
-            #pubkey = key.publickey()
-            #print("PUBLIIICCC "+key)
 
-        if(response[:5] == "BLGOK"):
-            BLOG = 1
+
+        #if(response[:5] == "BLGOK"):
+         #   BLOG = 1
             #my_mainpage.append(self.cmnd[7:])
 
 
@@ -378,7 +417,7 @@ class ClientThread(threading.Thread):
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         return ""
 
-class UserInputThread(threading.Thread):
+class UserInputThread(threading.Thread): #Ara yuz yazilmadan once komut satiri ile deneme yapmak icin yazilmistir.
     def __init__(self, threadname, logQueue):
         threading.Thread.__init__(self)
         self.threadName = threadname
