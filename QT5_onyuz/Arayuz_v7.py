@@ -20,7 +20,7 @@ import time
 
 
 
-
+# Arayuz sinifi burada
 class ProjectUi(QtWidgets.QMainWindow):
     def __init__(self, logQueue):
         self.logQueue = logQueue
@@ -129,7 +129,7 @@ class ProjectUi(QtWidgets.QMainWindow):
         #blocked_checkboxlist.append(blkchbx4)
         #blocked_checkboxlist.append(blkchbx5)
 
-    def users_button(self):
+    def users_button(self): # LSUSR komutu uygulanan metot
         suggest_checkboxlist = []
         usernamelist = []
         request="LSUSR"
@@ -183,16 +183,19 @@ class ProjectUi(QtWidgets.QMainWindow):
         # if checkboxlist[0]== 2:
         #    print("this is first item in list "+ self.ui.checkBox_1.text())
 
+    # ilk baslangicta ip port ve isim kisimlari initialize ediliyor
     def initializeIpPort(self):
         self.ui.ip_field.setText(str(yay.SERVER_HOST_2))
         self.ui.port_field.setText(str(yay.SERVER_PORT2))
         self.ui.username_field.setText("Yasemin")
         #self.UUIDtoConnect=uuid.uuid4()
 
+    # doldurulan ip ve porta gore baglanti yapilabilmesi icin baska bir metot cagiriliyor.
     def connect(self):
         self.get_host_with_port()
         pass
 
+    # bagli olunan kisiden public key isteme islemi yapiliyor
     def pubkey_button(self):
         # pubkey buttonuna basıldığında gerçekleştirilecek eylem
         request="PBKEY:"+"BUNUIMZALA"
@@ -298,6 +301,7 @@ class ProjectUi(QtWidgets.QMainWindow):
     def disable_button(self):
         self.ui.connect_button.setDisabled(True)
 
+    # connect tusuna basildiginda Client Threadi cagirarak baglantiyi saglayan metot
     def get_host_with_port(self):
        # ip ve port alma işlemi
         self.ip = self.ui.ip_field.text()
@@ -327,6 +331,7 @@ class ProjectUi(QtWidgets.QMainWindow):
     #     self.ui.SuggestedUser_field.addItem("XXX"+response+"XXX")
     #     #opp_uuid = self.findUUIDbyHostAndPort(self.ip, self.port)
 
+    # twit atma butonunu gercekleyen metot
     def share_twit_button(self):
         myBlog = self.ui.Twit_field.toPlainText()+"\n"
         yay.my_blog_list.append(myBlog)
@@ -375,7 +380,7 @@ class ProjectUi(QtWidgets.QMainWindow):
         self.show()
         self.qt_app.exec_()
 
-
+# arayuzun kosturuldugu thread
 class ArayuzThread(threading.Thread):
     def __init__(self, threadname, logQueue):
         threading.Thread.__init__(self)
@@ -386,7 +391,8 @@ class ArayuzThread(threading.Thread):
         app = ProjectUi(self.logQueue)
         app.run()
 
-
+# ana kod buradadir ve buradan itibaren calismaya baslanir.
+# Ilgili threadler son versiyon olan Yayincidan cagrilir ve kosmaya baslanir.
 def main():
     threads = []
     # ana soket oluşturuluyor ve hangi iplerden bağlantı kabul edileceği, port numarası bilgileri giriliyor..
