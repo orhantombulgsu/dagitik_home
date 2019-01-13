@@ -17,6 +17,7 @@ random_generator = Random.new().read
 f_priv = open('id_rsa','w+')
 f_pub = open('id_rsa.pub','w+')
 
+# keylerin uretimi
 if(f_priv and f_pub):
     my_private_key = f_priv.read()
     my_public_key = f_pub.read()
@@ -32,39 +33,37 @@ if(f_priv and f_pub):
 f_priv.close()
 f_pub.close()
 
+# blog listesi ve anasayfadaki twitler tutuluyor
 my_blog_list = []
 my_mainpage = []
 
+# diger tutulacak listeler
 # my_followed_list=[]
 # my_followers_list = []
 # my_blacklist = []
 # my_inbox_list = []
 
+
 BLOG = 0
-
-
+# bagli olunup olmadigini kontrol eden global degisken
 STATUS = 0
 
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT  = 12345
-SERVER_PORT2 = 12341
+SERVER_PORT  = 12345 # Kendi yayin yaptigi port
+SERVER_PORT2 = 12341 # otomatik baglanilacagi durumda baglanicalak port / test icin
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
 #SERVER_HOST = "127.0.0.1"
 #TYPE = "NEGOTIATOR"
-SERVER_HOST="172.20.10.9"
-SERVER_HOST_2="172.20.10.10"
-TYPE="YAYINCI"
+SERVER_HOST="172.20.10.9" # kendi yayin yaptigi ip
+SERVER_HOST_2="172.20.10.10" # otomatik baglanilacagi durumda baglanicalak ip / test icin
+TYPE="YAYINCI" # tipini belirtiyor
 
-NUMBER_OF_USERLIST = 5
-NAME = "YASEMIN"
+NUMBER_OF_USERLIST = 5# LSUSR komutuna gelen cevaptaki toplam kisi sayisi.
+NAME = "YASEMIN" # ismi
 
-serverQueue = queue.Queue()
-clientQueue = queue.Queue()
-
-userInfoDict = dict()
-
+userInfoDict = dict() # kisilerin tutuldugu liste; her acildiginda guncelleniyor
 try:
     with open('data.json', 'r') as fp:
         userInfoDict = json.load(fp)
@@ -72,10 +71,11 @@ except FileNotFoundError:
     with open('data.json', 'w') as fp:
         json.dump(userInfoDict, fp)
 
-myUUID = uuid.uuid1()
-print("my UUID = " + str(myUUID))
+myUUID = uuid.uuid4() # random uuidi
+# myUUID = uuid.uuid1() # pc ye gore uuid
+# print("my UUID = " + str(myUUID))
 
-
+# kisileri initialize etme
 # tmpUUID="yasemin"
 # userInfoDict[tmpUUID]=["yadress", "yPort", "yNanme", "yNEGOTIATOR",None]
 # tmpUUID="orhan"
@@ -132,7 +132,7 @@ class ServerThread(threading.Thread):
                 print("ServerThread:AlinanMesaj=" + msgReiceved)
                 log = "Server thread received a message : " + msgReiceved
                 self.logQueue.put(time.ctime() + "\t\t - " + log)
-                msgToSend = str(self.readerParser(msgReiceved))
+                msgToSend = str(self.readerParser(msgReiceved)) #parserda yorumlanilip cevap olusturuluyor
                 if len(msgToSend) >= 5:
                     print("ServerThread:GönderilenMesaj=" + msgToSend)
                     self.mySocket.send((msgToSend).encode())
@@ -145,7 +145,7 @@ class ServerThread(threading.Thread):
         global STATUS
         global userInfoDict
 
-        if prot == "HELLO":
+        if prot == "HELLO": # baglanti testi
             response = "HELLO"
 
         elif prot == "UINFO":  # YENI KULLANICI İSTEĞİ /KULLANICI BAĞLANTI KONTROLU
@@ -157,8 +157,8 @@ class ServerThread(threading.Thread):
                     response = "CHKED"
 
                 else:  # Kontrol için bekletme
+                    # otomatik serverından yeniden uuid isteme istemleri ve kontrolu yapiliyor.
                     UUIDtoCheck = paramList[0]
-                    # clientQueue.put("CHECK")
                     myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), "CHECK", self.logQueue)
                     response = myClient.control()
                     # print('RESPONSE:' + response)
@@ -373,7 +373,7 @@ class ClientThread(threading.Thread):
         #print("ClientThread:AlinanMesaj=" + response)
         mySocket.close()
 
-
+        # burada public keyin ve private key ile textin imzalanmasinin kontorlu islemleri yapiliyor.
         if(response[:5] == "MYPUB"):
             pub_sifrelimesaj=response[6:].strip().split("$")
             print(type(pub_sifrelimesaj[0]))
@@ -417,7 +417,7 @@ class ClientThread(threading.Thread):
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         return ""
 
-class UserInputThread(threading.Thread): #Ara yuz yazilmadan once komut satiri ile deneme yapmak icin yazilmistir.
+class UserInputThread(threading.Thread): #Arayuz yazilmadan once komut satiri ile deneme yapmak icin yazilmistir.
     def __init__(self, threadname, logQueue):
         threading.Thread.__init__(self)
         self.threadName = threadname
