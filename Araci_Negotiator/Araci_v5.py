@@ -11,22 +11,20 @@ import json
 
 THREADNUM = 5
 CONNECT_POINT_LIST = []  # list array of [ip,port,type,time]
-SERVER_PORT  = 12341
-SERVER_PORT2 = 12342
+SERVER_PORT  = 12341 # Aracinin kendisinin dinlediği port
+SERVER_PORT2 = 12342 # Aracinin bağnacağı port
 # SERVER_HOST = socket.gethostbyname(socket.gethostname())
-SERVER_HOST = "172.20.10.10"
-TYPE = "NEGOTIATOR"
+SERVER_HOST = "172.20.10.10" # Aracinin kendi ip si
+TYPE = "NEGOTIATOR" # aracinin tipi
 
-NUMBER_OF_USERLIST = 5
-NAME = "MUSTAFA"
-
-serverQueue = queue.Queue()
-clientQueue = queue.Queue()
-
-# uuid.NAMESPACE_DNS.hex # dagdelenin metodu(MAC E göre)
+NUMBER_OF_USERLIST = 5 # LSUSR komutuna gelen cevaptaki toplam kisi sayisi.
+NAME = "MUSTAFA" # Aracinin ismi
 
 
-userInfoDict = dict()
+# uuid.NAMESPACE_DNS.hex # (MAC E göre uuid)
+
+
+userInfoDict = dict() # kisilerin tutuldugu liste; her acildiginda guncelleniyor
 try:
     with open('data.json', 'r') as fp:
         userInfoDict = json.load(fp)
@@ -34,10 +32,11 @@ except FileNotFoundError:
     with open('data.json', 'w') as fp:
         json.dump(userInfoDict, fp)
 
-myUUID = uuid.uuid4()
-print("my UUID = " + str(myUUID))
+myUUID = uuid.uuid4() # random uuidi
+# myUUID = uuid.uuid1() # pc ye gore uuid
+# print("my UUID = " + str(myUUID))
 
-
+# kisileri initialize etme
 # tmpUUID="yasemin"
 # userInfoDict[tmpUUID]=["yadress", "yPort", "yNanme", "yNEGOTIATOR"]
 # tmpUUID="orhan"
@@ -91,7 +90,7 @@ class ServerThread(threading.Thread):
                 print("ServerThread:AlinanMesaj=" + msgReiceved)
                 log = "Server thread received a message : " + msgReiceved
                 self.logQueue.put(time.ctime() + "\t\t - " + log)
-                msgToSend = str(self.readerParser(msgReiceved))
+                msgToSend = str(self.readerParser(msgReiceved)) # parserda isleniyor
                 if len(msgToSend) >= 5:
                     print("ServerThread:GönderilenMesaj=" + msgToSend)
                     self.mySocket.send((msgToSend).encode())
@@ -117,7 +116,6 @@ class ServerThread(threading.Thread):
                 # userInfoList[paramList[0]]=list(paramList[1],paramList[2],paramList[3],paramList[4])
                 else:  # BEKLE AZ SEN
                     UUIDtoCheck = paramList[0]
-                    # clientQueue.put("CHECK")
                     myClient = ClientThread("Client Thread", paramList[1], int(paramList[2]), "CHECK", self.logQueue)
                     response = myClient.control()
                     # print('RESPONSE:' + response)
@@ -206,7 +204,7 @@ class ClientThread(threading.Thread):
         mySocket.connect((host, int(port)))
 
         prot = self.cmnd[:5]
-        if prot == "UINFO":
+        if prot == "UINFO": # otomatik kendi bilgilerini gönderiyor
             paramList = str(myUUID) + "$" + SERVER_HOST + "$" + str(SERVER_PORT) + "$" + NAME + "$" + TYPE
             textToSend = prot + ":" + paramList
         else:
@@ -232,7 +230,7 @@ class ClientThread(threading.Thread):
         self.logQueue.put(time.ctime() + "\t\t - " + log)
         return ""
 
-
+# herhangi bir anda kullanıcıdan girdi alıp gonderebiliyor.
 class UserInputThread(threading.Thread):
     def __init__(self, threadname, logQueue):
         threading.Thread.__init__(self)
